@@ -2,7 +2,7 @@ package com.inventorysystem_project.dtos;
 
 import com.inventorysystem_project.entities.Users;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 
 public class RolDTO {

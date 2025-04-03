@@ -1,6 +1,6 @@
 package com.inventorysystem_project.serviceinterfaces;
 
-import pe.edu.upc.aaw.demo1_202302_si63.entities.Role;
+import com.inventorysystem_project.entities.Role;
 
 import java.util.List;
 

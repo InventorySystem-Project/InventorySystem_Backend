@@ -6,9 +6,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pe.edu.upc.aaw.demo1_202302_si63.dtos.RolDTO;
-import pe.edu.upc.aaw.demo1_202302_si63.entities.Role;
-import pe.edu.upc.aaw.demo1_202302_si63.serviceinterfaces.IRolService;
+import com.inventorysystem_project.dtos.RolDTO;
+import com.inventorysystem_project.entities.Role;
+import com.inventorysystem_project.serviceinterfaces.IRolService;
 
 import java.util.List;
 import java.util.stream.Collectors;

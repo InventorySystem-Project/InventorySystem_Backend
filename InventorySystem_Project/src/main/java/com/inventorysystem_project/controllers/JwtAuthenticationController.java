@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.inventorysystem_project.JwtRequest;
-import com.inventorysystem_project.JwtResponse;
+import com.inventorysystem_project.security.JwtRequest;
+import com.inventorysystem_project.security.JwtResponse;
 import com.inventorysystem_project.security.JwtTokenUtil;
 import com.inventorysystem_project.serviceimplements.JwtUserDetailsService;
 

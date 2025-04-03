@@ -2,9 +2,9 @@ package com.inventorysystem_project.serviceimplements;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.aaw.demo1_202302_si63.entities.Role;
-import pe.edu.upc.aaw.demo1_202302_si63.repositories.RoleRepository;
-import pe.edu.upc.aaw.demo1_202302_si63.serviceinterfaces.IRolService;
+import com.inventorysystem_project.entities.Role;
+import com.inventorysystem_project.repositories.RoleRepository;
+import com.inventorysystem_project.serviceinterfaces.IRolService;
 
 import java.util.List;
 

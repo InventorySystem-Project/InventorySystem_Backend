@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.aaw.demo1_202302_si63.entities.Users;
-import pe.edu.upc.aaw.demo1_202302_si63.repositories.UserRepository;
+import com.inventorysystem_project.entities.Users;
+import com.inventorysystem_project.repositories.UserRepository;
 
 
 

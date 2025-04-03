@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pe.edu.upc.aaw.demo1_202302_si63.entities.Users;
+import com.inventorysystem_project.entities.Users;
 
 
 @Repository
