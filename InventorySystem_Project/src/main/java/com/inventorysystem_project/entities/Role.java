@@ -2,6 +2,7 @@ package com.inventorysystem_project.entities;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 
@@ -19,6 +20,7 @@ public class Role implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="user_id", nullable=false)
+	@JsonBackReference
 	private Users user;
 	
 	
