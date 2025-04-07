@@ -6,10 +6,18 @@ public class UserDTO {
 
     private Long id;
     private String username;
+    private String password;
     private Boolean enabled;
     private List<String> roles; // solo nombres de los roles
 
-    // Getters y setters
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+// Getters y setters
 
     public Long getId() {
         return id;

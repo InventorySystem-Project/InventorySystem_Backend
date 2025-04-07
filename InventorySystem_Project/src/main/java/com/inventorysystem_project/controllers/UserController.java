@@ -32,6 +32,7 @@ public class UserController {
             UserDTO dto = new UserDTO();
             dto.setId(user.getId());
             dto.setUsername(user.getUsername());
+            dto.setPassword(user.getPassword());
             dto.setEnabled(user.getEnabled());
             dto.setRoles(user.getRoles().stream().map(r -> r.getRol()).collect(Collectors.toList()));
             return dto;
