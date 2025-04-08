@@ -4,6 +4,7 @@ import com.inventorysystem_project.entities.Users;
 import com.inventorysystem_project.repositories.UserRepository;
 import com.inventorysystem_project.serviceinterfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +15,16 @@ public class UserServiceImplement implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
+    // Instancia del codificador de contraseñas
+    private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     @Override
     public void insert(Users user) {
-        userRepository.save(user);
+        // Encriptar la contraseña antes de guardarla
+        String encryptedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encryptedPassword);  // Setea la contraseña encriptada
+
+        userRepository.save(user);  // Guarda el usuario con la contraseña encriptada
     }
 
     @Override
