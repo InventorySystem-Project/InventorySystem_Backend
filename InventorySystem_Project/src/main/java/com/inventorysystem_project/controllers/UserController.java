@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-    @PostMapping
+    @PostMapping("Registrar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody UserDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -26,7 +26,8 @@ public class UserController {
         userService.insert(user);
     }
 
-    @GetMapping
+    @GetMapping("Listar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<UserDTO> listar() {
         return userService.list().stream().map(user -> {
             UserDTO dto = new UserDTO();
