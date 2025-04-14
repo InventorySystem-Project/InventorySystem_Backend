@@ -12,7 +12,7 @@ public class Proveedor {
     @Column(name = "nombre_empresa_proveedor")
     private String nombreEmpresaProveedor;
 
-    private String ruc;
+    private Long ruc;
 
     private String direccion;
 
@@ -45,11 +45,11 @@ public class Proveedor {
         this.nombreEmpresaProveedor = nombreEmpresaProveedor;
     }
 
-    public String getRuc() {
+    public Long getRuc() {
         return ruc;
     }
 
-    public void setRuc(String ruc) {
+    public void setRuc(Long ruc) {
         this.ruc = ruc;
     }
 

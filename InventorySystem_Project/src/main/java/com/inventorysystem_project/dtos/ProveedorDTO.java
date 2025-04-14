@@ -4,7 +4,7 @@ public class ProveedorDTO {
 
     private Long id;
     private String nombreEmpresaProveedor;
-    private String ruc;
+    private Long ruc;
     private String direccion;
     private String telefono;
     private String correo;
@@ -30,11 +30,11 @@ public class ProveedorDTO {
         this.nombreEmpresaProveedor = nombreEmpresaProveedor;
     }
 
-    public String getRuc() {
+    public Long getRuc() {
         return ruc;
     }
 
-    public void setRuc(String ruc) {
+    public void setRuc(Long ruc) {
         this.ruc = ruc;
     }
 

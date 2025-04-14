@@ -18,7 +18,7 @@ public class Empresa implements Serializable {
     private String nombre;
 
     @Column(nullable = false)
-    private Integer ruc;
+    private Long ruc;
 
     @Column(length = 50, nullable = false)
     private String direccion;
@@ -67,11 +67,11 @@ public class Empresa implements Serializable {
         this.nombre = nombre;
     }
 
-    public Integer getRuc() {
+    public Long getRuc() {
         return ruc;
     }
 
-    public void setRuc(Integer ruc) {
+    public void setRuc(Long ruc) {
         this.ruc = ruc;
     }
 

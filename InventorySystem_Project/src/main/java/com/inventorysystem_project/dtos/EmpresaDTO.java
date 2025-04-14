@@ -3,7 +3,7 @@ package com.inventorysystem_project.dtos;
 public class EmpresaDTO {
     private Long id;
     private String nombre;
-    private Integer ruc;
+    private Long ruc;
     private String direccion;
     private String telefono;
     private String correo;
@@ -27,11 +27,11 @@ public class EmpresaDTO {
         this.nombre = nombre;
     }
 
-    public Integer getRuc() {
+    public Long getRuc() {
         return ruc;
     }
 
-    public void setRuc(Integer ruc) {
+    public void setRuc(Long ruc) {
         this.ruc = ruc;
     }
 
