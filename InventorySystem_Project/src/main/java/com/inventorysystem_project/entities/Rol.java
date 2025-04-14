@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "roles", uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id", "rol" }) })
+@Table(name = "rol", uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id", "rol" }) })
 public class Rol implements Serializable {
 
 	private static final long serialVersionUID = 1L;
