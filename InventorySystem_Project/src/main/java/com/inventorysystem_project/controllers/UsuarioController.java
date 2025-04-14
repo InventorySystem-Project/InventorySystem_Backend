@@ -1,8 +1,8 @@
 package com.inventorysystem_project.controllers;
 
-import com.inventorysystem_project.dtos.UserDTO;
-import com.inventorysystem_project.entities.Users;
-import com.inventorysystem_project.serviceinterfaces.IUserService;
+import com.inventorysystem_project.dtos.UsuarioDTO;
+import com.inventorysystem_project.entities.Usuario;
+import com.inventorysystem_project.serviceinterfaces.IUsuarioService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,24 +13,24 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
-public class UserController {
+public class UsuarioController {
 
     @Autowired
-    private IUserService userService;
+    private IUsuarioService userService;
 
     @PostMapping("Registrar")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void registrar(@RequestBody UserDTO dto) {
+    public void registrar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
-        Users user = m.map(dto, Users.class);
+        Usuario user = m.map(dto, Usuario.class);
         userService.insert(user);
     }
 
     @GetMapping("Listar")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<UserDTO> listar() {
+    public List<UsuarioDTO> listar() {
         return userService.list().stream().map(user -> {
-            UserDTO dto = new UserDTO();
+            UsuarioDTO dto = new UsuarioDTO();
             dto.setId(user.getId());
             dto.setUsername(user.getUsername());
             dto.setPassword(user.getPassword());
@@ -41,9 +41,9 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserDTO listarPorId(@PathVariable("id") Long id) {
-        Users user = userService.listId(id);
-        UserDTO dto = new UserDTO();
+    public UsuarioDTO listarPorId(@PathVariable("id") Long id) {
+        Usuario user = userService.listId(id);
+        UsuarioDTO dto = new UsuarioDTO();
         dto.setId(user.getId());
         dto.setUsername(user.getUsername());
         dto.setEnabled(user.getEnabled());
@@ -59,9 +59,9 @@ public class UserController {
 
     @PutMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public void modificar(@RequestBody UserDTO dto) {
+    public void modificar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
-        Users user = m.map(dto, Users.class);
+        Usuario user = m.map(dto, Usuario.class);
         userService.insert(user);
     }
 }

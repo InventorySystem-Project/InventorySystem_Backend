@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.inventorysystem_project.dtos.RolDTO;
-import com.inventorysystem_project.entities.Role;
+import com.inventorysystem_project.entities.Rol;
 import com.inventorysystem_project.serviceinterfaces.IRolService;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/roles")
-public class RoleController {
+public class RolController {
     @Autowired
     private IRolService rolR;
 
@@ -23,7 +23,7 @@ public class RoleController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody RolDTO dto){
         ModelMapper m=new ModelMapper();
-        Role d=m.map(dto, Role.class);
+        Rol d=m.map(dto, Rol.class);
         rolR.insert(d);
     }
     @GetMapping("Listar")
@@ -44,7 +44,7 @@ public class RoleController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody RolDTO dto){
         ModelMapper m=new ModelMapper();
-        Role d=m.map(dto, Role.class);
+        Rol d=m.map(dto, Rol.class);
         rolR.insert(d);
     }
 }

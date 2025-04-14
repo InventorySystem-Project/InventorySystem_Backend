@@ -4,13 +4,12 @@ package com.inventorysystem_project
 import java.io.Serializable;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class Users implements Serializable {
+public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +23,7 @@ public class Users implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	@JsonManagedReference
-	private List<Role> roles;
+	private List<Rol> rols;
 
 	public Long getId() {
 		return id;
@@ -58,12 +57,12 @@ public class Users implements Serializable {
 		this.enabled = enabled;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
+	public List<Rol> getRoles() {
+		return rols;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	public void setRoles(List<Rol> rols) {
+		this.rols = rols;
 	}
 
 }

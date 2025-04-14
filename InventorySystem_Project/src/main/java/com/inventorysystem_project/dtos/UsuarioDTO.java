@@ -2,7 +2,7 @@ package com.inventorysystem_project.dtos;
 
 import java.util.List;
 
-public class UserDTO {
+public class UsuarioDTO {
 
     private Long id;
     private String username;

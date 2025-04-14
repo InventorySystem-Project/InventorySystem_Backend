@@ -3,13 +3,12 @@ package com.inventorysystem_project.entities;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "roles", uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id", "rol" }) })
-public class Role implements Serializable {
+public class Rol implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,26 +21,26 @@ public class Role implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="user_id", nullable=false)
 	@JsonBackReference
-	private Users user;
+	private Usuario user;
 
-	public Role(Long id, String rol, Users user) {
+	public Rol(Long id, String rol, Usuario user) {
 		this.id = id;
 		this.rol = rol;
 		this.user = user;
 	}
 
-	public Role() {
+	public Rol() {
 
 	}
 
 
 	//GETTERS AND SETTERES
 
-	public Users getUser() {
+	public Usuario getUser() {
 		return user;
 	}
 
-	public void setUser(Users user) {
+	public void setUser(Usuario user) {
 		this.user = user;
 	}
 

@@ -2,8 +2,8 @@ package com.inventorysystem_project.serviceimplements;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
-import com.inventorysystem_project.entities.Role;
-import com.inventorysystem_project.repositories.RoleRepository;
+import com.inventorysystem_project.entities.Rol;
+import com.inventorysystem_project.repositories.RolRepository;
 import com.inventorysystem_project.serviceinterfaces.IRolService;
 
 import java.util.List;
@@ -11,15 +11,15 @@ import java.util.List;
 @Service
 public class RolServiceImplement implements IRolService {
     @Autowired
-    private RoleRepository rolR;
+    private RolRepository rolR;
 
     @Override
-    public void insert(Role role) {
-        rolR.save(role);
+    public void insert(Rol rol) {
+        rolR.save(rol);
     }
 
     @Override
-    public List<Role> list() {
+    public List<Rol> list() {
         return rolR.findAll();
     }
 
@@ -29,7 +29,7 @@ public class RolServiceImplement implements IRolService {
     }
 
     @Override
-    public Role listId(int idRol) {
+    public Rol listId(int idRol) {
         return null;
     }
 

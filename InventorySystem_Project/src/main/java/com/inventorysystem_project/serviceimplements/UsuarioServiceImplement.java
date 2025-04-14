@@ -1,8 +1,8 @@
 package com.inventorysystem_project.serviceimplements;
 
-import com.inventorysystem_project.entities.Users;
-import com.inventorysystem_project.repositories.UserRepository;
-import com.inventorysystem_project.serviceinterfaces.IUserService;
+import com.inventorysystem_project.entities.Usuario;
+import com.inventorysystem_project.repositories.UsuarioRepository;
+import com.inventorysystem_project.serviceinterfaces.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UserServiceImplement implements IUserService {
+public class UsuarioServiceImplement implements IUsuarioService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UsuarioRepository userRepository;
 
     // Instancia del codificador de contraseñas
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @Override
-    public void insert(Users user) {
+    public void insert(Usuario user) {
         // Encriptar la contraseña antes de guardarla
         String encryptedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);  // Setea la contraseña encriptada
@@ -28,7 +28,7 @@ public class UserServiceImplement implements IUserService {
     }
 
     @Override
-    public List<Users> list() {
+    public List<Usuario> list() {
         return userRepository.findAll();
     }
 
@@ -38,7 +38,7 @@ public class UserServiceImplement implements IUserService {
     }
 
     @Override
-    public Users listId(Long id) {
+    public Usuario listId(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 }

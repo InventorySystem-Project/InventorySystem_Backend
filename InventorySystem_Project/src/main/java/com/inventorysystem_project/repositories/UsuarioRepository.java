@@ -6,15 +6,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import com.inventorysystem_project.entities.Users;
+import com.inventorysystem_project.entities.Usuario;
 
 
 @Repository
-public interface UserRepository extends JpaRepository<Users, Long> {
-	public Users findByUsername(String username);
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
+	public Usuario findByUsername(String username);
 	
 	//BUSCAR POR NOMBRE
-	@Query("select count(u.username) from Users u where u.username =:username")
+	@Query("select count(u.username) from Usuario u where u.username =:username")
 	public int buscarUsername(@Param("username") String nombre);
 	
 	

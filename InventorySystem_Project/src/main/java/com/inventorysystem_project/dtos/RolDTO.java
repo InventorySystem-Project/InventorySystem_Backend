@@ -1,16 +1,13 @@
 package com.inventorysystem_project.dtos;
 
-import com.inventorysystem_project.entities.Users;
-
-import jakarta.persistence.*;
-import java.io.Serializable;
+import com.inventorysystem_project.entities.Usuario;
 
 public class RolDTO {
 
     private Long id;
     private String rol;
 
-    private Users user;
+    private Usuario user;
 
     public Long getId() {
         return id;
@@ -28,11 +25,11 @@ public class RolDTO {
         this.rol = rol;
     }
 
-    public Users getUser() {
+    public Usuario getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(Usuario user) {
         this.user = user;
     }
 }
