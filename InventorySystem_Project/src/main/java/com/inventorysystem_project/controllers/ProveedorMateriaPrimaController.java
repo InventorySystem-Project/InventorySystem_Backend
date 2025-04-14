@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/proveedores-materias-primas")
+@RequestMapping("/proveedor-materia-prima")
 public class ProveedorMateriaPrimaController {
 
     @Autowired
@@ -26,13 +26,11 @@ public class ProveedorMateriaPrimaController {
 
     @GetMapping("Listar")
     public List<ProveedorMateriaPrimaDTO> listar() {
-        return proveedorMateriaPrimaService.list().stream().map(proveedorMateria -> {
+        return proveedorMateriaPrimaService.list().stream().map(proveedorMateriaPrima -> {
             ProveedorMateriaPrimaDTO dto = new ProveedorMateriaPrimaDTO();
-            dto.setId(proveedorMateria.getId());
-            dto.setProveedorId(proveedorMateria.getProveedor().getId());
-            dto.setMateriaPrimaId(proveedorMateria.getMateriaPrima().getId());
-            dto.setPrecio(proveedorMateria.getPrecio());
-            dto.setActivo(proveedorMateria.getActivo());
+            dto.setId(proveedorMateriaPrima.getId());
+            dto.setMateriaPrimaId(proveedorMateriaPrima.getMateriaPrima().getId());
+            dto.setProveedorId(proveedorMateriaPrima.getProveedor().getId());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -42,10 +40,8 @@ public class ProveedorMateriaPrimaController {
         ProveedorMateriaPrima proveedorMateriaPrima = proveedorMateriaPrimaService.listId(id);
         ProveedorMateriaPrimaDTO dto = new ProveedorMateriaPrimaDTO();
         dto.setId(proveedorMateriaPrima.getId());
-        dto.setProveedorId(proveedorMateriaPrima.getProveedor().getId());
         dto.setMateriaPrimaId(proveedorMateriaPrima.getMateriaPrima().getId());
-        dto.setPrecio(proveedorMateriaPrima.getPrecio());
-        dto.setActivo(proveedorMateriaPrima.getActivo());
+        dto.setProveedorId(proveedorMateriaPrima.getProveedor().getId());
         return dto;
     }
 
@@ -61,4 +57,3 @@ public class ProveedorMateriaPrimaController {
         proveedorMateriaPrimaService.insert(proveedorMateriaPrima);
     }
 }
-

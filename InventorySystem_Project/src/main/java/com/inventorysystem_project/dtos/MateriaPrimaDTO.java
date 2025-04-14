@@ -5,10 +5,11 @@ public class MateriaPrimaDTO {
     private Long id;
     private String nombre;
     private String descripcion;
-    private Double precio;
-    private Boolean activo;
+    private Double precioUnitario;
+    private String unidad;
+    private String imagen;
 
-    // Getters y setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -34,20 +35,27 @@ public class MateriaPrimaDTO {
         this.descripcion = descripcion;
     }
 
-    public Double getPrecio() {
-        return precio;
+    public Double getPrecioUnitario() {
+        return precioUnitario;
     }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
+    public void setPrecioUnitario(Double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public String getUnidad() {
+        return unidad;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }
-

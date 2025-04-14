@@ -3,12 +3,15 @@ package com.inventorysystem_project.dtos;
 public class DetalleOrdenCompraDTO {
 
     private Long id;
+    private Long ordenCompraId;
+    private Long materiaPrimaId;
     private Integer cantidad;
     private Double precioUnitario;
-    private Long productoId;  // Solo el ID del producto
-    private Long ordenCompraId;  // Solo el ID de la orden de compra
+    private Double descuento;
+    private Double impuesto;
+    private Double subtotal;
 
-    // Getters y setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -16,6 +19,22 @@ public class DetalleOrdenCompraDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getOrdenCompraId() {
+        return ordenCompraId;
+    }
+
+    public void setOrdenCompraId(Long ordenCompraId) {
+        this.ordenCompraId = ordenCompraId;
+    }
+
+    public Long getMateriaPrimaId() {
+        return materiaPrimaId;
+    }
+
+    public void setMateriaPrimaId(Long materiaPrimaId) {
+        this.materiaPrimaId = materiaPrimaId;
     }
 
     public Integer getCantidad() {
@@ -34,20 +53,27 @@ public class DetalleOrdenCompraDTO {
         this.precioUnitario = precioUnitario;
     }
 
-    public Long getProductoId() {
-        return productoId;
+    public Double getDescuento() {
+        return descuento;
     }
 
-    public void setProductoId(Long productoId) {
-        this.productoId = productoId;
+    public void setDescuento(Double descuento) {
+        this.descuento = descuento;
     }
 
-    public Long getOrdenCompraId() {
-        return ordenCompraId;
+    public Double getImpuesto() {
+        return impuesto;
     }
 
-    public void setOrdenCompraId(Long ordenCompraId) {
-        this.ordenCompraId = ordenCompraId;
+    public void setImpuesto(Double impuesto) {
+        this.impuesto = impuesto;
+    }
+
+    public Double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
     }
 }
-

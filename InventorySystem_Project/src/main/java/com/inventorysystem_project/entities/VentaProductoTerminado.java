@@ -1,31 +1,35 @@
 package com.inventorysystem_project.entities;
 
 import jakarta.persistence.*;
-
 import java.util.Date;
 
 @Entity
-@Table(name = "venta_producto_terminado")
 public class VentaProductoTerminado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+    @JoinColumn(name = "almacen_id")
+    private Almacen almacen;
+
+    @Temporal(TemporalType.DATE)
+    private Date fechaMovimiento;
+
+    private String tipoMovimiento;
+
+    private Integer cantidad;
+
+    private Integer unidad;
+
+    private String estadoEntrega;
+
+    @ManyToOne
     @JoinColumn(name = "producto_terminado_id")
     private ProductoTerminado productoTerminado;
 
-    @Column
-    private Integer cantidad;
-
-    @Column
-    private Double precioTotal;
-
-    @Column
-    private Date fecha;
-
-    // Getters y setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -35,12 +39,28 @@ public class VentaProductoTerminado {
         this.id = id;
     }
 
-    public ProductoTerminado getProductoTerminado() {
-        return productoTerminado;
+    public Almacen getAlmacen() {
+        return almacen;
     }
 
-    public void setProductoTerminado(ProductoTerminado productoTerminado) {
-        this.productoTerminado = productoTerminado;
+    public void setAlmacen(Almacen almacen) {
+        this.almacen = almacen;
+    }
+
+    public Date getFechaMovimiento() {
+        return fechaMovimiento;
+    }
+
+    public void setFechaMovimiento(Date fechaMovimiento) {
+        this.fechaMovimiento = fechaMovimiento;
+    }
+
+    public String getTipoMovimiento() {
+        return tipoMovimiento;
+    }
+
+    public void setTipoMovimiento(String tipoMovimiento) {
+        this.tipoMovimiento = tipoMovimiento;
     }
 
     public Integer getCantidad() {
@@ -51,20 +71,27 @@ public class VentaProductoTerminado {
         this.cantidad = cantidad;
     }
 
-    public Double getPrecioTotal() {
-        return precioTotal;
+    public Integer getUnidad() {
+        return unidad;
     }
 
-    public void setPrecioTotal(Double precioTotal) {
-        this.precioTotal = precioTotal;
+    public void setUnidad(Integer unidad) {
+        this.unidad = unidad;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public String getEstadoEntrega() {
+        return estadoEntrega;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setEstadoEntrega(String estadoEntrega) {
+        this.estadoEntrega = estadoEntrega;
+    }
+
+    public ProductoTerminado getProductoTerminado() {
+        return productoTerminado;
+    }
+
+    public void setProductoTerminado(ProductoTerminado productoTerminado) {
+        this.productoTerminado = productoTerminado;
     }
 }
-

@@ -29,11 +29,11 @@ public class OrdenCompraController {
         return ordenCompraService.list().stream().map(ordenCompra -> {
             OrdenCompraDTO dto = new OrdenCompraDTO();
             dto.setId(ordenCompra.getId());
-            dto.setNumeroOrden(ordenCompra.getNumeroOrden());
-            dto.setFechaOrden(ordenCompra.getFechaOrden());
+            dto.setEmpresaId(ordenCompra.getEmpresa().getId());
             dto.setProveedorId(ordenCompra.getProveedor().getId());
+            dto.setFechaEmision(ordenCompra.getFechaEmision());
             dto.setTotal(ordenCompra.getTotal());
-            dto.setActivo(ordenCompra.getActivo());
+            dto.setCodigoOrden(ordenCompra.getCodigoOrden());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -43,11 +43,11 @@ public class OrdenCompraController {
         OrdenCompra ordenCompra = ordenCompraService.listId(id);
         OrdenCompraDTO dto = new OrdenCompraDTO();
         dto.setId(ordenCompra.getId());
-        dto.setNumeroOrden(ordenCompra.getNumeroOrden());
-        dto.setFechaOrden(ordenCompra.getFechaOrden());
+        dto.setEmpresaId(ordenCompra.getEmpresa().getId());
         dto.setProveedorId(ordenCompra.getProveedor().getId());
+        dto.setFechaEmision(ordenCompra.getFechaEmision());
         dto.setTotal(ordenCompra.getTotal());
-        dto.setActivo(ordenCompra.getActivo());
+        dto.setCodigoOrden(ordenCompra.getCodigoOrden());
         return dto;
     }
 
@@ -63,4 +63,3 @@ public class OrdenCompraController {
         ordenCompraService.insert(ordenCompra);
     }
 }
-

@@ -5,10 +5,15 @@ public class ProductoTerminadoDTO {
     private Long id;
     private String nombre;
     private String descripcion;
-    private Double precio;
-    private Boolean activo;
+    private String tipo;
+    private String modelo;
+    private String color;
+    private Double precioUnitario;
+    private String pieza;
+    private Boolean enabled;
+    private String imagen;
 
-    // Getters y setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -34,20 +39,59 @@ public class ProductoTerminadoDTO {
         this.descripcion = descripcion;
     }
 
-    public Double getPrecio() {
-        return precio;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public String getModelo() {
+        return modelo;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public Double getPrecioUnitario() {
+        return precioUnitario;
+    }
+
+    public void setPrecioUnitario(Double precioUnitario) {
+        this.precioUnitario = precioUnitario;
+    }
+
+    public String getPieza() {
+        return pieza;
+    }
+
+    public void setPieza(String pieza) {
+        this.pieza = pieza;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }
-

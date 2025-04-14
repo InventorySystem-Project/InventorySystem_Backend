@@ -34,4 +34,3 @@ public class VentaProductoTerminadoServiceImplement implements IVentaProductoTer
         return ventaProductoTerminadoRepository.findById(id).orElse(null);
     }
 }
-

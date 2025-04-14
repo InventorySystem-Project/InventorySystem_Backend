@@ -1,29 +1,56 @@
-package com.inventorysystem_project
-		.entities;
+package com.inventorysystem_project.entities;
 
-import java.io.Serializable;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import java.util.Date;
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name = "users")
-public class Usuario implements Serializable {
+public class Usuario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length = 30, unique = true)
-	private String username;
+	@Column(length = 50)
+	private String nombre;
+
+	@Column(length = 50)
+	private String apellido;
+
+	@Column(length = 100)
+	private String correo;
+
 	@Column(length = 200)
 	private String password;
+
+	@Column(length = 50)
+	private String username;
+
+	@Column(length = 50)
+	private String genero;
+
+	private int dni;
+
+	@Column(length = 100)
+	private String foto;
+
+	private Date fechaNacimiento;
+
+	private int telefono;
+
 	private Boolean enabled;
+
+	@ManyToOne
+	@JoinColumn(name = "empresa_id", referencedColumnName = "id")
+	private Empresa empresa;
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
 	@JsonManagedReference
-	private List<Rol> rols;
+	private List<Rol> roles;
+
+	// Getters and Setters
 
 	public Long getId() {
 		return id;
@@ -33,12 +60,28 @@ public class Usuario implements Serializable {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 
 	public String getPassword() {
@@ -49,6 +92,54 @@ public class Usuario implements Serializable {
 		this.password = password;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public int getDni() {
+		return dni;
+	}
+
+	public void setDni(int dni) {
+		this.dni = dni;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(Date fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public int getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+
 	public Boolean getEnabled() {
 		return enabled;
 	}
@@ -57,12 +148,19 @@ public class Usuario implements Serializable {
 		this.enabled = enabled;
 	}
 
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
 	public List<Rol> getRoles() {
-		return rols;
+		return roles;
 	}
 
-	public void setRoles(List<Rol> rols) {
-		this.rols = rols;
+	public void setRoles(List<Rol> roles) {
+		this.roles = roles;
 	}
-
 }

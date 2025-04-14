@@ -12,56 +12,49 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     @Autowired
-    private IUsuarioService userService;
+    private IUsuarioService usuarioService;
 
-    @PostMapping("Registrar")
+    @PostMapping("/registrar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
-        Usuario user = m.map(dto, Usuario.class);
-        userService.insert(user);
+        Usuario usuario = m.map(dto, Usuario.class);
+        // Asumiendo que el DTO tiene el ID de la empresa y los roles como String
+        usuarioService.insert(usuario);
     }
 
-    @GetMapping("Listar")
+    @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public List<UsuarioDTO> listar() {
-        return userService.list().stream().map(user -> {
-            UsuarioDTO dto = new UsuarioDTO();
-            dto.setId(user.getId());
-            dto.setUsername(user.getUsername());
-            dto.setPassword(user.getPassword());
-            dto.setEnabled(user.getEnabled());
-            dto.setRoles(user.getRoles().stream().map(r -> r.getRol()).collect(Collectors.toList()));
-            return dto;
+        return usuarioService.list().stream().map(usuario -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(usuario, UsuarioDTO.class);
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public UsuarioDTO listarPorId(@PathVariable("id") Long id) {
-        Usuario user = userService.listId(id);
-        UsuarioDTO dto = new UsuarioDTO();
-        dto.setId(user.getId());
-        dto.setUsername(user.getUsername());
-        dto.setEnabled(user.getEnabled());
-        dto.setRoles(user.getRoles().stream().map(r -> r.getRol()).collect(Collectors.toList()));
-        return dto;
+        Usuario usuario = usuarioService.listId(id);
+        ModelMapper m = new ModelMapper();
+        return m.map(usuario, UsuarioDTO.class);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Long id) {
-        userService.delete(id);
+        usuarioService.delete(id);
     }
 
     @PutMapping
     @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
-        Usuario user = m.map(dto, Usuario.class);
-        userService.insert(user);
+        Usuario usuario = m.map(dto, Usuario.class);
+        usuarioService.insert(usuario);
     }
 }

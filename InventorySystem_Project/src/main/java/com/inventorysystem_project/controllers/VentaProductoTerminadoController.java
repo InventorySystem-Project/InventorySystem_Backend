@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/ventas-productos-terminados")
+@RequestMapping("/venta-producto-terminado")
 public class VentaProductoTerminadoController {
 
     @Autowired
@@ -20,32 +20,38 @@ public class VentaProductoTerminadoController {
     @PostMapping("Registrar")
     public void registrar(@RequestBody VentaProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
-        VentaProductoTerminado venta = m.map(dto, VentaProductoTerminado.class);
-        ventaProductoTerminadoService.insert(venta);
+        VentaProductoTerminado ventaProductoTerminado = m.map(dto, VentaProductoTerminado.class);
+        ventaProductoTerminadoService.insert(ventaProductoTerminado);
     }
 
     @GetMapping("Listar")
     public List<VentaProductoTerminadoDTO> listar() {
-        return ventaProductoTerminadoService.list().stream().map(venta -> {
+        return ventaProductoTerminadoService.list().stream().map(ventaProductoTerminado -> {
             VentaProductoTerminadoDTO dto = new VentaProductoTerminadoDTO();
-            dto.setId(venta.getId());
-            dto.setProductoTerminadoId(venta.getProductoTerminado().getId());
-            dto.setCantidad(venta.getCantidad());
-            dto.setPrecioTotal(venta.getPrecioTotal());
-            dto.setFecha(venta.getFecha());
+            dto.setId(ventaProductoTerminado.getId());
+            dto.setAlmacenId(ventaProductoTerminado.getAlmacen().getId());
+            dto.setFechaMovimiento(ventaProductoTerminado.getFechaMovimiento());
+            dto.setTipoMovimiento(ventaProductoTerminado.getTipoMovimiento());
+            dto.setCantidad(ventaProductoTerminado.getCantidad());
+            dto.setUnidad(ventaProductoTerminado.getUnidad());
+            dto.setEstadoEntrega(ventaProductoTerminado.getEstadoEntrega());
+            dto.setProductoTerminadoId(ventaProductoTerminado.getProductoTerminado().getId());
             return dto;
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public VentaProductoTerminadoDTO listarPorId(@PathVariable("id") Long id) {
-        VentaProductoTerminado venta = ventaProductoTerminadoService.listId(id);
+        VentaProductoTerminado ventaProductoTerminado = ventaProductoTerminadoService.listId(id);
         VentaProductoTerminadoDTO dto = new VentaProductoTerminadoDTO();
-        dto.setId(venta.getId());
-        dto.setProductoTerminadoId(venta.getProductoTerminado().getId());
-        dto.setCantidad(venta.getCantidad());
-        dto.setPrecioTotal(venta.getPrecioTotal());
-        dto.setFecha(venta.getFecha());
+        dto.setId(ventaProductoTerminado.getId());
+        dto.setAlmacenId(ventaProductoTerminado.getAlmacen().getId());
+        dto.setFechaMovimiento(ventaProductoTerminado.getFechaMovimiento());
+        dto.setTipoMovimiento(ventaProductoTerminado.getTipoMovimiento());
+        dto.setCantidad(ventaProductoTerminado.getCantidad());
+        dto.setUnidad(ventaProductoTerminado.getUnidad());
+        dto.setEstadoEntrega(ventaProductoTerminado.getEstadoEntrega());
+        dto.setProductoTerminadoId(ventaProductoTerminado.getProductoTerminado().getId());
         return dto;
     }
 
@@ -57,8 +63,7 @@ public class VentaProductoTerminadoController {
     @PutMapping
     public void modificar(@RequestBody VentaProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
-        VentaProductoTerminado venta = m.map(dto, VentaProductoTerminado.class);
-        ventaProductoTerminadoService.insert(venta);
+        VentaProductoTerminado ventaProductoTerminado = m.map(dto, VentaProductoTerminado.class);
+        ventaProductoTerminadoService.insert(ventaProductoTerminado);
     }
 }
-

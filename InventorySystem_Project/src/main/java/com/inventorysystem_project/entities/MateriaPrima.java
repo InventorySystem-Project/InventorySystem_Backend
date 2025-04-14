@@ -3,26 +3,23 @@ package com.inventorysystem_project.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "materia_prima")
 public class MateriaPrima {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100, unique = true)
     private String nombre;
 
-    @Column(length = 255)
     private String descripcion;
 
-    @Column
-    private Double precio;
+    private Double precioUnitario;
 
-    @Column
-    private Boolean activo;
+    private String unidad;
 
-    // Getters y setters
+    private String imagen;
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -48,20 +45,27 @@ public class MateriaPrima {
         this.descripcion = descripcion;
     }
 
-    public Double getPrecio() {
-        return precio;
+    public Double getPrecioUnitario() {
+        return precioUnitario;
     }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
+    public void setPrecioUnitario(Double precioUnitario) {
+        this.precioUnitario = precioUnitario;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public String getUnidad() {
+        return unidad;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setUnidad(String unidad) {
+        this.unidad = unidad;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }
-

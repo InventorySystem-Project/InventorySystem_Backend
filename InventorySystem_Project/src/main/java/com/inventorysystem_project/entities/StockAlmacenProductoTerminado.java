@@ -1,27 +1,30 @@
 package com.inventorysystem_project.entities;
 
 import jakarta.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "stock_almacen_producto_terminado")
 public class StockAlmacenProductoTerminado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "almacen_id")
+    private int stockActual;
+    private int stockMinimo;
+
+    @Temporal(TemporalType.DATE)
+    private Date ultimaActualizacion;
+
+    @ManyToOne
+    @JoinColumn(name = "almacen_id", referencedColumnName = "id")
     private Almacen almacen;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "producto_terminado_id")
+    @ManyToOne
+    @JoinColumn(name = "producto_terminado_id", referencedColumnName = "id")
     private ProductoTerminado productoTerminado;
 
-    @Column
-    private Integer cantidad;
-
-    // Getters y setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -29,6 +32,30 @@ public class StockAlmacenProductoTerminado {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public int getStockActual() {
+        return stockActual;
+    }
+
+    public void setStockActual(int stockActual) {
+        this.stockActual = stockActual;
+    }
+
+    public int getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(int stockMinimo) {
+        this.stockMinimo = stockMinimo;
+    }
+
+    public Date getUltimaActualizacion() {
+        return ultimaActualizacion;
+    }
+
+    public void setUltimaActualizacion(Date ultimaActualizacion) {
+        this.ultimaActualizacion = ultimaActualizacion;
     }
 
     public Almacen getAlmacen() {
@@ -45,13 +72,5 @@ public class StockAlmacenProductoTerminado {
 
     public void setProductoTerminado(ProductoTerminado productoTerminado) {
         this.productoTerminado = productoTerminado;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
     }
 }

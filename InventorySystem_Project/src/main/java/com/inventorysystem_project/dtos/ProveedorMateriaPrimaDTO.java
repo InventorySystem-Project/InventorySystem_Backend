@@ -3,12 +3,10 @@ package com.inventorysystem_project.dtos;
 public class ProveedorMateriaPrimaDTO {
 
     private Long id;
-    private Long proveedorId;  // ID del proveedor
-    private Long materiaPrimaId;  // ID de la materia prima
-    private Double precio;
-    private Boolean activo;
+    private Long materiaPrimaId;
+    private Long proveedorId;
 
-    // Getters y setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -16,14 +14,6 @@ public class ProveedorMateriaPrimaDTO {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getProveedorId() {
-        return proveedorId;
-    }
-
-    public void setProveedorId(Long proveedorId) {
-        this.proveedorId = proveedorId;
     }
 
     public Long getMateriaPrimaId() {
@@ -34,20 +24,11 @@ public class ProveedorMateriaPrimaDTO {
         this.materiaPrimaId = materiaPrimaId;
     }
 
-    public Double getPrecio() {
-        return precio;
+    public Long getProveedorId() {
+        return proveedorId;
     }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setProveedorId(Long proveedorId) {
+        this.proveedorId = proveedorId;
     }
 }
-

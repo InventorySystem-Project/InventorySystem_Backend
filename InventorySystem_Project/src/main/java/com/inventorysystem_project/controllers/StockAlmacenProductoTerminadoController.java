@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/stock-almacen-productos-terminados")
+@RequestMapping("/stock-almacen-producto-terminado")
 public class StockAlmacenProductoTerminadoController {
 
     @Autowired
@@ -20,30 +20,34 @@ public class StockAlmacenProductoTerminadoController {
     @PostMapping("Registrar")
     public void registrar(@RequestBody StockAlmacenProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
-        StockAlmacenProductoTerminado stock = m.map(dto, StockAlmacenProductoTerminado.class);
-        stockAlmacenProductoTerminadoService.insert(stock);
+        StockAlmacenProductoTerminado stockAlmacenProductoTerminado = m.map(dto, StockAlmacenProductoTerminado.class);
+        stockAlmacenProductoTerminadoService.insert(stockAlmacenProductoTerminado);
     }
 
     @GetMapping("Listar")
     public List<StockAlmacenProductoTerminadoDTO> listar() {
-        return stockAlmacenProductoTerminadoService.list().stream().map(stock -> {
+        return stockAlmacenProductoTerminadoService.list().stream().map(stockAlmacenProductoTerminado -> {
             StockAlmacenProductoTerminadoDTO dto = new StockAlmacenProductoTerminadoDTO();
-            dto.setId(stock.getId());
-            dto.setAlmacenId(stock.getAlmacen().getId());
-            dto.setProductoTerminadoId(stock.getProductoTerminado().getId());
-            dto.setCantidad(stock.getCantidad());
+            dto.setId(stockAlmacenProductoTerminado.getId());
+            dto.setAlmacenId(stockAlmacenProductoTerminado.getAlmacen().getId());
+            dto.setProductoTerminadoId(stockAlmacenProductoTerminado.getProductoTerminado().getId());
+            dto.setStockActual(stockAlmacenProductoTerminado.getStockActual());
+            dto.setStockMinimo(stockAlmacenProductoTerminado.getStockMinimo());
+            dto.setUltimaActualizacion(stockAlmacenProductoTerminado.getUltimaActualizacion());
             return dto;
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public StockAlmacenProductoTerminadoDTO listarPorId(@PathVariable("id") Long id) {
-        StockAlmacenProductoTerminado stock = stockAlmacenProductoTerminadoService.listId(id);
+        StockAlmacenProductoTerminado stockAlmacenProductoTerminado = stockAlmacenProductoTerminadoService.listId(id);
         StockAlmacenProductoTerminadoDTO dto = new StockAlmacenProductoTerminadoDTO();
-        dto.setId(stock.getId());
-        dto.setAlmacenId(stock.getAlmacen().getId());
-        dto.setProductoTerminadoId(stock.getProductoTerminado().getId());
-        dto.setCantidad(stock.getCantidad());
+        dto.setId(stockAlmacenProductoTerminado.getId());
+        dto.setAlmacenId(stockAlmacenProductoTerminado.getAlmacen().getId());
+        dto.setProductoTerminadoId(stockAlmacenProductoTerminado.getProductoTerminado().getId());
+        dto.setStockActual(stockAlmacenProductoTerminado.getStockActual());
+        dto.setStockMinimo(stockAlmacenProductoTerminado.getStockMinimo());
+        dto.setUltimaActualizacion(stockAlmacenProductoTerminado.getUltimaActualizacion());
         return dto;
     }
 
@@ -55,8 +59,7 @@ public class StockAlmacenProductoTerminadoController {
     @PutMapping
     public void modificar(@RequestBody StockAlmacenProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
-        StockAlmacenProductoTerminado stock = m.map(dto, StockAlmacenProductoTerminado.class);
-        stockAlmacenProductoTerminadoService.insert(stock);
+        StockAlmacenProductoTerminado stockAlmacenProductoTerminado = m.map(dto, StockAlmacenProductoTerminado.class);
+        stockAlmacenProductoTerminadoService.insert(stockAlmacenProductoTerminado);
     }
 }
-

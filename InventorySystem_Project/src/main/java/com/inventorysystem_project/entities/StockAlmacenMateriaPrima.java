@@ -1,27 +1,30 @@
 package com.inventorysystem_project.entities;
 
 import jakarta.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "stock_almacen_materia_prima")
 public class StockAlmacenMateriaPrima {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "almacen_id")
+    @ManyToOne
+    @JoinColumn(name = "almacen_id", referencedColumnName = "id")
     private Almacen almacen;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "materia_prima_id")
+    @ManyToOne
+    @JoinColumn(name = "materia_prima_id", referencedColumnName = "id")
     private MateriaPrima materiaPrima;
 
-    @Column
-    private Integer cantidad;
+    private int stockActual;
+    private int stockMinimo;
 
-    // Getters y setters
+    @Temporal(TemporalType.DATE)
+    private Date ultimaActualizacion;
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -47,12 +50,27 @@ public class StockAlmacenMateriaPrima {
         this.materiaPrima = materiaPrima;
     }
 
-    public Integer getCantidad() {
-        return cantidad;
+    public int getStockActual() {
+        return stockActual;
     }
 
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
+    public void setStockActual(int stockActual) {
+        this.stockActual = stockActual;
+    }
+
+    public int getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(int stockMinimo) {
+        this.stockMinimo = stockMinimo;
+    }
+
+    public Date getUltimaActualizacion() {
+        return ultimaActualizacion;
+    }
+
+    public void setUltimaActualizacion(Date ultimaActualizacion) {
+        this.ultimaActualizacion = ultimaActualizacion;
     }
 }
-

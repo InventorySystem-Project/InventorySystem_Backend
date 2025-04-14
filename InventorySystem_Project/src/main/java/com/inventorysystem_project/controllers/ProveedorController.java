@@ -29,9 +29,14 @@ public class ProveedorController {
         return proveedorService.list().stream().map(proveedor -> {
             ProveedorDTO dto = new ProveedorDTO();
             dto.setId(proveedor.getId());
-            dto.setNombre(proveedor.getNombre());
+            dto.setNombreEmpresaProveedor(proveedor.getNombreEmpresaProveedor());
+            dto.setRuc(proveedor.getRuc());
             dto.setDireccion(proveedor.getDireccion());
-            dto.setActivo(proveedor.getActivo());
+            dto.setTelefono(proveedor.getTelefono());
+            dto.setCorreo(proveedor.getCorreo());
+            dto.setPais(proveedor.getPais());
+            dto.setNombreContacto(proveedor.getNombreContacto());
+            dto.setEnabled(proveedor.getEnabled());
             return dto;
         }).collect(Collectors.toList());
     }
@@ -41,9 +46,14 @@ public class ProveedorController {
         Proveedor proveedor = proveedorService.listId(id);
         ProveedorDTO dto = new ProveedorDTO();
         dto.setId(proveedor.getId());
-        dto.setNombre(proveedor.getNombre());
+        dto.setNombreEmpresaProveedor(proveedor.getNombreEmpresaProveedor());
+        dto.setRuc(proveedor.getRuc());
         dto.setDireccion(proveedor.getDireccion());
-        dto.setActivo(proveedor.getActivo());
+        dto.setTelefono(proveedor.getTelefono());
+        dto.setCorreo(proveedor.getCorreo());
+        dto.setPais(proveedor.getPais());
+        dto.setNombreContacto(proveedor.getNombreContacto());
+        dto.setEnabled(proveedor.getEnabled());
         return dto;
     }
 
@@ -59,4 +69,3 @@ public class ProveedorController {
         proveedorService.insert(proveedor);
     }
 }
-

@@ -1,13 +1,17 @@
 package com.inventorysystem_project.dtos;
 
+import java.util.Date;
+
 public class StockAlmacenMateriaPrimaDTO {
 
     private Long id;
-    private Long almacenId;  // ID del almacén
-    private Long materiaPrimaId;  // ID de la materia prima
-    private Integer cantidad;
+    private Long almacenId;
+    private Long materiaPrimaId;
+    private int stockActual;
+    private int stockMinimo;
+    private Date ultimaActualizacion;
 
-    // Getters y setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -33,12 +37,27 @@ public class StockAlmacenMateriaPrimaDTO {
         this.materiaPrimaId = materiaPrimaId;
     }
 
-    public Integer getCantidad() {
-        return cantidad;
+    public int getStockActual() {
+        return stockActual;
     }
 
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
+    public void setStockActual(int stockActual) {
+        this.stockActual = stockActual;
+    }
+
+    public int getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(int stockMinimo) {
+        this.stockMinimo = stockMinimo;
+    }
+
+    public Date getUltimaActualizacion() {
+        return ultimaActualizacion;
+    }
+
+    public void setUltimaActualizacion(Date ultimaActualizacion) {
+        this.ultimaActualizacion = ultimaActualizacion;
     }
 }
-

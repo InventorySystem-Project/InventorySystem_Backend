@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/materias-primas")
+@RequestMapping("/materia-prima")
 public class MateriaPrimaController {
 
     @Autowired
@@ -26,26 +26,28 @@ public class MateriaPrimaController {
 
     @GetMapping("Listar")
     public List<MateriaPrimaDTO> listar() {
-        return materiaPrimaService.list().stream().map(materia -> {
+        return materiaPrimaService.list().stream().map(materiaPrima -> {
             MateriaPrimaDTO dto = new MateriaPrimaDTO();
-            dto.setId(materia.getId());
-            dto.setNombre(materia.getNombre());
-            dto.setDescripcion(materia.getDescripcion());
-            dto.setPrecio(materia.getPrecio());
-            dto.setActivo(materia.getActivo());
+            dto.setId(materiaPrima.getId());
+            dto.setNombre(materiaPrima.getNombre());
+            dto.setDescripcion(materiaPrima.getDescripcion());
+            dto.setPrecioUnitario(materiaPrima.getPrecioUnitario());
+            dto.setUnidad(materiaPrima.getUnidad());
+            dto.setImagen(materiaPrima.getImagen());
             return dto;
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public MateriaPrimaDTO listarPorId(@PathVariable("id") Long id) {
-        MateriaPrima materia = materiaPrimaService.listId(id);
+        MateriaPrima materiaPrima = materiaPrimaService.listId(id);
         MateriaPrimaDTO dto = new MateriaPrimaDTO();
-        dto.setId(materia.getId());
-        dto.setNombre(materia.getNombre());
-        dto.setDescripcion(materia.getDescripcion());
-        dto.setPrecio(materia.getPrecio());
-        dto.setActivo(materia.getActivo());
+        dto.setId(materiaPrima.getId());
+        dto.setNombre(materiaPrima.getNombre());
+        dto.setDescripcion(materiaPrima.getDescripcion());
+        dto.setPrecioUnitario(materiaPrima.getPrecioUnitario());
+        dto.setUnidad(materiaPrima.getUnidad());
+        dto.setImagen(materiaPrima.getImagen());
         return dto;
     }
 
@@ -61,4 +63,3 @@ public class MateriaPrimaController {
         materiaPrimaService.insert(materiaPrima);
     }
 }
-

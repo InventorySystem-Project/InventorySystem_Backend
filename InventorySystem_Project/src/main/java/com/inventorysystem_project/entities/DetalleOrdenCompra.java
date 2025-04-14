@@ -1,30 +1,34 @@
 package com.inventorysystem_project.entities;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "detalle_orden_compra")
 public class DetalleOrdenCompra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private Integer cantidad;
-
-    @Column
-    private Double precioUnitario;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "producto_id")
-    private ProductoTerminado productoTerminado;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "orden_compra_id")
     private OrdenCompra ordenCompra;
 
-    // Getters y setters
+    @ManyToOne
+    @JoinColumn(name = "materia_prima_id")
+    private MateriaPrima materiaPrima;
+
+    private Integer cantidad;
+
+    private Double precioUnitario;
+
+    private Double descuento;
+
+    private Double impuesto;
+
+    private Double subtotal;
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -32,6 +36,22 @@ public class DetalleOrdenCompra {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public OrdenCompra getOrdenCompra() {
+        return ordenCompra;
+    }
+
+    public void setOrdenCompra(OrdenCompra ordenCompra) {
+        this.ordenCompra = ordenCompra;
+    }
+
+    public MateriaPrima getMateriaPrima() {
+        return materiaPrima;
+    }
+
+    public void setMateriaPrima(MateriaPrima materiaPrima) {
+        this.materiaPrima = materiaPrima;
     }
 
     public Integer getCantidad() {
@@ -50,20 +70,27 @@ public class DetalleOrdenCompra {
         this.precioUnitario = precioUnitario;
     }
 
-    public ProductoTerminado getProducto() {
-        return productoTerminado;
+    public Double getDescuento() {
+        return descuento;
     }
 
-    public void setProducto(ProductoTerminado producto) {
-        this.productoTerminado = producto;
+    public void setDescuento(Double descuento) {
+        this.descuento = descuento;
     }
 
-    public OrdenCompra getOrdenCompra() {
-        return ordenCompra;
+    public Double getImpuesto() {
+        return impuesto;
     }
 
-    public void setOrdenCompra(OrdenCompra ordenCompra) {
-        this.ordenCompra = ordenCompra;
+    public void setImpuesto(Double impuesto) {
+        this.impuesto = impuesto;
+    }
+
+    public Double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
     }
 }
-

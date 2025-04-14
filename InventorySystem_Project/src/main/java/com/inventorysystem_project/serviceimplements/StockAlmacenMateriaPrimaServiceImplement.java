@@ -34,4 +34,3 @@ public class StockAlmacenMateriaPrimaServiceImplement implements IStockAlmacenMa
         return stockAlmacenMateriaPrimaRepository.findById(id).orElse(null);
     }
 }
-

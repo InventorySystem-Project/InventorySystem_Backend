@@ -20,30 +20,34 @@ public class StockAlmacenMateriaPrimaController {
     @PostMapping("Registrar")
     public void registrar(@RequestBody StockAlmacenMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
-        StockAlmacenMateriaPrima stock = m.map(dto, StockAlmacenMateriaPrima.class);
-        stockAlmacenMateriaPrimaService.insert(stock);
+        StockAlmacenMateriaPrima stockAlmacenMateriaPrima = m.map(dto, StockAlmacenMateriaPrima.class);
+        stockAlmacenMateriaPrimaService.insert(stockAlmacenMateriaPrima);
     }
 
     @GetMapping("Listar")
     public List<StockAlmacenMateriaPrimaDTO> listar() {
-        return stockAlmacenMateriaPrimaService.list().stream().map(stock -> {
+        return stockAlmacenMateriaPrimaService.list().stream().map(stockAlmacenMateriaPrima -> {
             StockAlmacenMateriaPrimaDTO dto = new StockAlmacenMateriaPrimaDTO();
-            dto.setId(stock.getId());
-            dto.setAlmacenId(stock.getAlmacen().getId());
-            dto.setMateriaPrimaId(stock.getMateriaPrima().getId());
-            dto.setCantidad(stock.getCantidad());
+            dto.setId(stockAlmacenMateriaPrima.getId());
+            dto.setAlmacenId(stockAlmacenMateriaPrima.getAlmacen().getId());
+            dto.setMateriaPrimaId(stockAlmacenMateriaPrima.getMateriaPrima().getId());
+            dto.setStockActual(stockAlmacenMateriaPrima.getStockActual());
+            dto.setStockMinimo(stockAlmacenMateriaPrima.getStockMinimo());
+            dto.setUltimaActualizacion(stockAlmacenMateriaPrima.getUltimaActualizacion());
             return dto;
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public StockAlmacenMateriaPrimaDTO listarPorId(@PathVariable("id") Long id) {
-        StockAlmacenMateriaPrima stock = stockAlmacenMateriaPrimaService.listId(id);
+        StockAlmacenMateriaPrima stockAlmacenMateriaPrima = stockAlmacenMateriaPrimaService.listId(id);
         StockAlmacenMateriaPrimaDTO dto = new StockAlmacenMateriaPrimaDTO();
-        dto.setId(stock.getId());
-        dto.setAlmacenId(stock.getAlmacen().getId());
-        dto.setMateriaPrimaId(stock.getMateriaPrima().getId());
-        dto.setCantidad(stock.getCantidad());
+        dto.setId(stockAlmacenMateriaPrima.getId());
+        dto.setAlmacenId(stockAlmacenMateriaPrima.getAlmacen().getId());
+        dto.setMateriaPrimaId(stockAlmacenMateriaPrima.getMateriaPrima().getId());
+        dto.setStockActual(stockAlmacenMateriaPrima.getStockActual());
+        dto.setStockMinimo(stockAlmacenMateriaPrima.getStockMinimo());
+        dto.setUltimaActualizacion(stockAlmacenMateriaPrima.getUltimaActualizacion());
         return dto;
     }
 
@@ -55,8 +59,7 @@ public class StockAlmacenMateriaPrimaController {
     @PutMapping
     public void modificar(@RequestBody StockAlmacenMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
-        StockAlmacenMateriaPrima stock = m.map(dto, StockAlmacenMateriaPrima.class);
-        stockAlmacenMateriaPrimaService.insert(stock);
+        StockAlmacenMateriaPrima stockAlmacenMateriaPrima = m.map(dto, StockAlmacenMateriaPrima.class);
+        stockAlmacenMateriaPrimaService.insert(stockAlmacenMateriaPrima);
     }
 }
-

@@ -1,34 +1,31 @@
 package com.inventorysystem_project.entities;
 
-import java.io.Serializable;
-import java.util.Date;
 import jakarta.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "orden_compra")
-public class OrdenCompra implements Serializable {
+public class OrdenCompra {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 50)
-    private String numeroOrden;
+    @ManyToOne
+    @JoinColumn(name = "empresa_id", nullable = false)
+    private Empresa empresa;
 
-    @Column
-    private Date fechaOrden;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "proveedor_id")
+    @ManyToOne
+    @JoinColumn(name = "proveedor_id", nullable = false)
     private Proveedor proveedor;
 
-    @Column
+    @Temporal(TemporalType.DATE)
+    private Date fechaEmision;
+
     private Double total;
 
-    @Column
-    private Boolean activo;
+    private String codigoOrden;
 
-    // Getters y setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -38,20 +35,12 @@ public class OrdenCompra implements Serializable {
         this.id = id;
     }
 
-    public String getNumeroOrden() {
-        return numeroOrden;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setNumeroOrden(String numeroOrden) {
-        this.numeroOrden = numeroOrden;
-    }
-
-    public Date getFechaOrden() {
-        return fechaOrden;
-    }
-
-    public void setFechaOrden(Date fechaOrden) {
-        this.fechaOrden = fechaOrden;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
     public Proveedor getProveedor() {
@@ -62,6 +51,14 @@ public class OrdenCompra implements Serializable {
         this.proveedor = proveedor;
     }
 
+    public Date getFechaEmision() {
+        return fechaEmision;
+    }
+
+    public void setFechaEmision(Date fechaEmision) {
+        this.fechaEmision = fechaEmision;
+    }
+
     public Double getTotal() {
         return total;
     }
@@ -70,12 +67,11 @@ public class OrdenCompra implements Serializable {
         this.total = total;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public String getCodigoOrden() {
+        return codigoOrden;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setCodigoOrden(String codigoOrden) {
+        this.codigoOrden = codigoOrden;
     }
 }
-

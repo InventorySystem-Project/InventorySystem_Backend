@@ -3,28 +3,21 @@ package com.inventorysystem_project.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "proveedor_materia_prima")
 public class ProveedorMateriaPrima {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "proveedor_id")
-    private Proveedor proveedor;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "materia_prima_id")
+    @ManyToOne
+    @JoinColumn(name = "materia_prima_id", referencedColumnName = "id")
     private MateriaPrima materiaPrima;
 
-    @Column
-    private Double precio;
+    @ManyToOne
+    @JoinColumn(name = "proveedor_id", referencedColumnName = "id")
+    private Proveedor proveedor;
 
-    @Column
-    private Boolean activo;
-
-    // Getters y setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -32,14 +25,6 @@ public class ProveedorMateriaPrima {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Proveedor getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(Proveedor proveedor) {
-        this.proveedor = proveedor;
     }
 
     public MateriaPrima getMateriaPrima() {
@@ -50,20 +35,11 @@ public class ProveedorMateriaPrima {
         this.materiaPrima = materiaPrima;
     }
 
-    public Double getPrecio() {
-        return precio;
+    public Proveedor getProveedor() {
+        return proveedor;
     }
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public Boolean getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
     }
 }
-

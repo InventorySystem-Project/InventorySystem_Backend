@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/detalle-ordenes-compra")
+@RequestMapping("/detalle-orden-compra")
 public class DetalleOrdenCompraController {
 
     @Autowired
@@ -26,26 +26,32 @@ public class DetalleOrdenCompraController {
 
     @GetMapping("Listar")
     public List<DetalleOrdenCompraDTO> listar() {
-        return detalleOrdenCompraService.list().stream().map(detalle -> {
+        return detalleOrdenCompraService.list().stream().map(detalleOrdenCompra -> {
             DetalleOrdenCompraDTO dto = new DetalleOrdenCompraDTO();
-            dto.setId(detalle.getId());
-            dto.setCantidad(detalle.getCantidad());
-            dto.setPrecioUnitario(detalle.getPrecioUnitario());
-            dto.setProductoId(detalle.getProducto().getId());
-            dto.setOrdenCompraId(detalle.getOrdenCompra().getId());
+            dto.setId(detalleOrdenCompra.getId());
+            dto.setOrdenCompraId(detalleOrdenCompra.getOrdenCompra().getId());
+            dto.setMateriaPrimaId(detalleOrdenCompra.getMateriaPrima().getId());
+            dto.setCantidad(detalleOrdenCompra.getCantidad());
+            dto.setPrecioUnitario(detalleOrdenCompra.getPrecioUnitario());
+            dto.setDescuento(detalleOrdenCompra.getDescuento());
+            dto.setImpuesto(detalleOrdenCompra.getImpuesto());
+            dto.setSubtotal(detalleOrdenCompra.getSubtotal());
             return dto;
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public DetalleOrdenCompraDTO listarPorId(@PathVariable("id") Long id) {
-        DetalleOrdenCompra detalle = detalleOrdenCompraService.listId(id);
+        DetalleOrdenCompra detalleOrdenCompra = detalleOrdenCompraService.listId(id);
         DetalleOrdenCompraDTO dto = new DetalleOrdenCompraDTO();
-        dto.setId(detalle.getId());
-        dto.setCantidad(detalle.getCantidad());
-        dto.setPrecioUnitario(detalle.getPrecioUnitario());
-        dto.setProductoId(detalle.getProducto().getId());
-        dto.setOrdenCompraId(detalle.getOrdenCompra().getId());
+        dto.setId(detalleOrdenCompra.getId());
+        dto.setOrdenCompraId(detalleOrdenCompra.getOrdenCompra().getId());
+        dto.setMateriaPrimaId(detalleOrdenCompra.getMateriaPrima().getId());
+        dto.setCantidad(detalleOrdenCompra.getCantidad());
+        dto.setPrecioUnitario(detalleOrdenCompra.getPrecioUnitario());
+        dto.setDescuento(detalleOrdenCompra.getDescuento());
+        dto.setImpuesto(detalleOrdenCompra.getImpuesto());
+        dto.setSubtotal(detalleOrdenCompra.getSubtotal());
         return dto;
     }
 
@@ -61,4 +67,3 @@ public class DetalleOrdenCompraController {
         detalleOrdenCompraService.insert(detalleOrdenCompra);
     }
 }
-

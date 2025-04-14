@@ -5,13 +5,13 @@ import java.util.Date;
 public class OrdenCompraDTO {
 
     private Long id;
-    private String numeroOrden;
-    private Date fechaOrden;
-    private Long proveedorId;  // Solo ID del proveedor
+    private Long empresaId;
+    private Long proveedorId;
+    private Date fechaEmision;
     private Double total;
-    private Boolean activo;
+    private String codigoOrden;
 
-    // Getters y setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -21,20 +21,12 @@ public class OrdenCompraDTO {
         this.id = id;
     }
 
-    public String getNumeroOrden() {
-        return numeroOrden;
+    public Long getEmpresaId() {
+        return empresaId;
     }
 
-    public void setNumeroOrden(String numeroOrden) {
-        this.numeroOrden = numeroOrden;
-    }
-
-    public Date getFechaOrden() {
-        return fechaOrden;
-    }
-
-    public void setFechaOrden(Date fechaOrden) {
-        this.fechaOrden = fechaOrden;
+    public void setEmpresaId(Long empresaId) {
+        this.empresaId = empresaId;
     }
 
     public Long getProveedorId() {
@@ -45,6 +37,14 @@ public class OrdenCompraDTO {
         this.proveedorId = proveedorId;
     }
 
+    public Date getFechaEmision() {
+        return fechaEmision;
+    }
+
+    public void setFechaEmision(Date fechaEmision) {
+        this.fechaEmision = fechaEmision;
+    }
+
     public Double getTotal() {
         return total;
     }
@@ -53,12 +53,11 @@ public class OrdenCompraDTO {
         this.total = total;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public String getCodigoOrden() {
+        return codigoOrden;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setCodigoOrden(String codigoOrden) {
+        this.codigoOrden = codigoOrden;
     }
 }
-

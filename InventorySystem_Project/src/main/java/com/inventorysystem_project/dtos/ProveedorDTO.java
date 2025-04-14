@@ -3,11 +3,16 @@ package com.inventorysystem_project.dtos;
 public class ProveedorDTO {
 
     private Long id;
-    private String nombre;
+    private String nombreEmpresaProveedor;
+    private String ruc;
     private String direccion;
-    private Boolean activo;
+    private String telefono;
+    private String correo;
+    private String pais;
+    private String nombreContacto;
+    private Boolean enabled;
 
-    // Getters y setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -17,12 +22,20 @@ public class ProveedorDTO {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreEmpresaProveedor() {
+        return nombreEmpresaProveedor;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreEmpresaProveedor(String nombreEmpresaProveedor) {
+        this.nombreEmpresaProveedor = nombreEmpresaProveedor;
+    }
+
+    public String getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
     }
 
     public String getDireccion() {
@@ -33,12 +46,43 @@ public class ProveedorDTO {
         this.direccion = direccion;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public String getNombreContacto() {
+        return nombreContacto;
+    }
+
+    public void setNombreContacto(String nombreContacto) {
+        this.nombreContacto = nombreContacto;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }
-

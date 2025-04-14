@@ -34,4 +34,3 @@ public class MateriaPrimaServiceImplement implements IMateriaPrimaService {
         return materiaPrimaRepository.findById(id).orElse(null);
     }
 }
-

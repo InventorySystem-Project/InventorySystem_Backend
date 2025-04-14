@@ -26,26 +26,36 @@ public class ProductoTerminadoController {
 
     @GetMapping("Listar")
     public List<ProductoTerminadoDTO> listar() {
-        return productoTerminadoService.list().stream().map(producto -> {
+        return productoTerminadoService.list().stream().map(productoTerminado -> {
             ProductoTerminadoDTO dto = new ProductoTerminadoDTO();
-            dto.setId(producto.getId());
-            dto.setNombre(producto.getNombre());
-            dto.setDescripcion(producto.getDescripcion());
-            dto.setPrecio(producto.getPrecio());
-            dto.setActivo(producto.getActivo());
+            dto.setId(productoTerminado.getId());
+            dto.setNombre(productoTerminado.getNombre());
+            dto.setDescripcion(productoTerminado.getDescripcion());
+            dto.setTipo(productoTerminado.getTipo());
+            dto.setModelo(productoTerminado.getModelo());
+            dto.setColor(productoTerminado.getColor());
+            dto.setPrecioUnitario(productoTerminado.getPrecioUnitario());
+            dto.setPieza(productoTerminado.getPieza());
+            dto.setEnabled(productoTerminado.getEnabled());
+            dto.setImagen(productoTerminado.getImagen());
             return dto;
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public ProductoTerminadoDTO listarPorId(@PathVariable("id") Long id) {
-        ProductoTerminado producto = productoTerminadoService.listId(id);
+        ProductoTerminado productoTerminado = productoTerminadoService.listId(id);
         ProductoTerminadoDTO dto = new ProductoTerminadoDTO();
-        dto.setId(producto.getId());
-        dto.setNombre(producto.getNombre());
-        dto.setDescripcion(producto.getDescripcion());
-        dto.setPrecio(producto.getPrecio());
-        dto.setActivo(producto.getActivo());
+        dto.setId(productoTerminado.getId());
+        dto.setNombre(productoTerminado.getNombre());
+        dto.setDescripcion(productoTerminado.getDescripcion());
+        dto.setTipo(productoTerminado.getTipo());
+        dto.setModelo(productoTerminado.getModelo());
+        dto.setColor(productoTerminado.getColor());
+        dto.setPrecioUnitario(productoTerminado.getPrecioUnitario());
+        dto.setPieza(productoTerminado.getPieza());
+        dto.setEnabled(productoTerminado.getEnabled());
+        dto.setImagen(productoTerminado.getImagen());
         return dto;
     }
 
@@ -61,4 +71,3 @@ public class ProductoTerminadoController {
         productoTerminadoService.insert(productoTerminado);
     }
 }
-

@@ -1,26 +1,33 @@
 package com.inventorysystem_project.entities;
 
-import java.io.Serializable;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "proveedor")
-public class Proveedor implements Serializable {
+public class Proveedor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100, unique = true)
-    private String nombre;
+    @Column(name = "nombre_empresa_proveedor")
+    private String nombreEmpresaProveedor;
 
-    @Column(length = 255)
+    private String ruc;
+
     private String direccion;
 
-    @Column
-    private Boolean activo;
+    private String telefono;
 
-    // Getters y setters
+    private String correo;
+
+    private String pais;
+
+    @Column(name = "nombre_contacto")
+    private String nombreContacto;
+
+    private Boolean enabled;
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -30,12 +37,20 @@ public class Proveedor implements Serializable {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreEmpresaProveedor() {
+        return nombreEmpresaProveedor;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreEmpresaProveedor(String nombreEmpresaProveedor) {
+        this.nombreEmpresaProveedor = nombreEmpresaProveedor;
+    }
+
+    public String getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(String ruc) {
+        this.ruc = ruc;
     }
 
     public String getDireccion() {
@@ -46,12 +61,43 @@ public class Proveedor implements Serializable {
         this.direccion = direccion;
     }
 
-    public Boolean getActivo() {
-        return activo;
+    public String getTelefono() {
+        return telefono;
     }
 
-    public void setActivo(Boolean activo) {
-        this.activo = activo;
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public String getNombreContacto() {
+        return nombreContacto;
+    }
+
+    public void setNombreContacto(String nombreContacto) {
+        this.nombreContacto = nombreContacto;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }
-

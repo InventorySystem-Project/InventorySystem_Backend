@@ -5,12 +5,15 @@ import java.util.Date;
 public class VentaProductoTerminadoDTO {
 
     private Long id;
-    private Long productoTerminadoId;  // ID del producto terminado
+    private Long almacenId;
+    private Date fechaMovimiento;
+    private String tipoMovimiento;
     private Integer cantidad;
-    private Double precioTotal;
-    private Date fecha;
+    private Integer unidad;
+    private String estadoEntrega;
+    private Long productoTerminadoId;
 
-    // Getters y setters
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -20,12 +23,28 @@ public class VentaProductoTerminadoDTO {
         this.id = id;
     }
 
-    public Long getProductoTerminadoId() {
-        return productoTerminadoId;
+    public Long getAlmacenId() {
+        return almacenId;
     }
 
-    public void setProductoTerminadoId(Long productoTerminadoId) {
-        this.productoTerminadoId = productoTerminadoId;
+    public void setAlmacenId(Long almacenId) {
+        this.almacenId = almacenId;
+    }
+
+    public Date getFechaMovimiento() {
+        return fechaMovimiento;
+    }
+
+    public void setFechaMovimiento(Date fechaMovimiento) {
+        this.fechaMovimiento = fechaMovimiento;
+    }
+
+    public String getTipoMovimiento() {
+        return tipoMovimiento;
+    }
+
+    public void setTipoMovimiento(String tipoMovimiento) {
+        this.tipoMovimiento = tipoMovimiento;
     }
 
     public Integer getCantidad() {
@@ -36,20 +55,27 @@ public class VentaProductoTerminadoDTO {
         this.cantidad = cantidad;
     }
 
-    public Double getPrecioTotal() {
-        return precioTotal;
+    public Integer getUnidad() {
+        return unidad;
     }
 
-    public void setPrecioTotal(Double precioTotal) {
-        this.precioTotal = precioTotal;
+    public void setUnidad(Integer unidad) {
+        this.unidad = unidad;
     }
 
-    public Date getFecha() {
-        return fecha;
+    public String getEstadoEntrega() {
+        return estadoEntrega;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setEstadoEntrega(String estadoEntrega) {
+        this.estadoEntrega = estadoEntrega;
+    }
+
+    public Long getProductoTerminadoId() {
+        return productoTerminadoId;
+    }
+
+    public void setProductoTerminadoId(Long productoTerminadoId) {
+        this.productoTerminadoId = productoTerminadoId;
     }
 }
-

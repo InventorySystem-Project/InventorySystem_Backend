@@ -34,4 +34,3 @@ public class ProveedorMateriaPrimaServiceImplement implements IProveedorMateriaP
         return proveedorMateriaPrimaRepository.findById(id).orElse(null);
     }
 }
-
