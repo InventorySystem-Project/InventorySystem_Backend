@@ -23,7 +23,7 @@ public class AlmacenController {
     @Autowired
     private IEmpresaService empresaService;
 
-    @PostMapping
+    @PostMapping("/registrar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody AlmacenDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -40,7 +40,7 @@ public class AlmacenController {
         almacenService.insert(almacen);
     }
 
-    @GetMapping
+    @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public List<AlmacenDTO> listar() {
         return almacenService.list().stream().map(almacen -> {
@@ -56,6 +56,7 @@ public class AlmacenController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public AlmacenDTO listarPorId(@PathVariable("id") Long id) {
         Almacen almacen = almacenService.listId(id);
         AlmacenDTO dto = new AlmacenDTO();

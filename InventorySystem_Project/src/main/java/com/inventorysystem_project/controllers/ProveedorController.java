@@ -5,6 +5,7 @@ import com.inventorysystem_project.entities.Proveedor;
 import com.inventorysystem_project.serviceinterfaces.IProveedorService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,52 +18,39 @@ public class ProveedorController {
     @Autowired
     private IProveedorService proveedorService;
 
-    @PostMapping("Registrar")
+    @PostMapping("/registrar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody ProveedorDTO dto) {
         ModelMapper m = new ModelMapper();
         Proveedor proveedor = m.map(dto, Proveedor.class);
         proveedorService.insert(proveedor);
     }
 
-    @GetMapping("Listar")
+    @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public List<ProveedorDTO> listar() {
         return proveedorService.list().stream().map(proveedor -> {
-            ProveedorDTO dto = new ProveedorDTO();
-            dto.setId(proveedor.getId());
-            dto.setNombreEmpresaProveedor(proveedor.getNombreEmpresaProveedor());
-            dto.setRuc(proveedor.getRuc());
-            dto.setDireccion(proveedor.getDireccion());
-            dto.setTelefono(proveedor.getTelefono());
-            dto.setCorreo(proveedor.getCorreo());
-            dto.setPais(proveedor.getPais());
-            dto.setNombreContacto(proveedor.getNombreContacto());
-            dto.setEnabled(proveedor.getEnabled());
-            return dto;
+            ModelMapper m = new ModelMapper();
+            return m.map(proveedor, ProveedorDTO.class);
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ProveedorDTO listarPorId(@PathVariable("id") Long id) {
         Proveedor proveedor = proveedorService.listId(id);
-        ProveedorDTO dto = new ProveedorDTO();
-        dto.setId(proveedor.getId());
-        dto.setNombreEmpresaProveedor(proveedor.getNombreEmpresaProveedor());
-        dto.setRuc(proveedor.getRuc());
-        dto.setDireccion(proveedor.getDireccion());
-        dto.setTelefono(proveedor.getTelefono());
-        dto.setCorreo(proveedor.getCorreo());
-        dto.setPais(proveedor.getPais());
-        dto.setNombreContacto(proveedor.getNombreContacto());
-        dto.setEnabled(proveedor.getEnabled());
-        return dto;
+        ModelMapper m = new ModelMapper();
+        return m.map(proveedor, ProveedorDTO.class);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Long id) {
         proveedorService.delete(id);
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody ProveedorDTO dto) {
         ModelMapper m = new ModelMapper();
         Proveedor proveedor = m.map(dto, Proveedor.class);

@@ -5,6 +5,7 @@ import com.inventorysystem_project.entities.MateriaPrima;
 import com.inventorysystem_project.serviceinterfaces.IMateriaPrimaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,46 +18,39 @@ public class MateriaPrimaController {
     @Autowired
     private IMateriaPrimaService materiaPrimaService;
 
-    @PostMapping("Registrar")
+    @PostMapping("/registrar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody MateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
         MateriaPrima materiaPrima = m.map(dto, MateriaPrima.class);
         materiaPrimaService.insert(materiaPrima);
     }
 
-    @GetMapping("Listar")
+    @GetMapping("listar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<MateriaPrimaDTO> listar() {
         return materiaPrimaService.list().stream().map(materiaPrima -> {
-            MateriaPrimaDTO dto = new MateriaPrimaDTO();
-            dto.setId(materiaPrima.getId());
-            dto.setNombre(materiaPrima.getNombre());
-            dto.setDescripcion(materiaPrima.getDescripcion());
-            dto.setPrecioUnitario(materiaPrima.getPrecioUnitario());
-            dto.setUnidad(materiaPrima.getUnidad());
-            dto.setImagen(materiaPrima.getImagen());
-            return dto;
+            ModelMapper m = new ModelMapper();
+            return m.map(materiaPrima, MateriaPrimaDTO.class);
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public MateriaPrimaDTO listarPorId(@PathVariable("id") Long id) {
         MateriaPrima materiaPrima = materiaPrimaService.listId(id);
-        MateriaPrimaDTO dto = new MateriaPrimaDTO();
-        dto.setId(materiaPrima.getId());
-        dto.setNombre(materiaPrima.getNombre());
-        dto.setDescripcion(materiaPrima.getDescripcion());
-        dto.setPrecioUnitario(materiaPrima.getPrecioUnitario());
-        dto.setUnidad(materiaPrima.getUnidad());
-        dto.setImagen(materiaPrima.getImagen());
-        return dto;
+        ModelMapper m = new ModelMapper();
+        return m.map(materiaPrima, MateriaPrimaDTO.class);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Long id) {
         materiaPrimaService.delete(id);
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody MateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
         MateriaPrima materiaPrima = m.map(dto, MateriaPrima.class);

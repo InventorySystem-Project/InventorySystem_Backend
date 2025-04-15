@@ -5,6 +5,7 @@ import com.inventorysystem_project.entities.ProductoTerminado;
 import com.inventorysystem_project.serviceinterfaces.IProductoTerminadoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,54 +18,39 @@ public class ProductoTerminadoController {
     @Autowired
     private IProductoTerminadoService productoTerminadoService;
 
-    @PostMapping("Registrar")
+    @PostMapping("/registrar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody ProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
         ProductoTerminado productoTerminado = m.map(dto, ProductoTerminado.class);
         productoTerminadoService.insert(productoTerminado);
     }
 
-    @GetMapping("Listar")
+    @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public List<ProductoTerminadoDTO> listar() {
         return productoTerminadoService.list().stream().map(productoTerminado -> {
-            ProductoTerminadoDTO dto = new ProductoTerminadoDTO();
-            dto.setId(productoTerminado.getId());
-            dto.setNombre(productoTerminado.getNombre());
-            dto.setDescripcion(productoTerminado.getDescripcion());
-            dto.setTipo(productoTerminado.getTipo());
-            dto.setModelo(productoTerminado.getModelo());
-            dto.setColor(productoTerminado.getColor());
-            dto.setPrecioUnitario(productoTerminado.getPrecioUnitario());
-            dto.setPieza(productoTerminado.getPieza());
-            dto.setEnabled(productoTerminado.getEnabled());
-            dto.setImagen(productoTerminado.getImagen());
-            return dto;
+            ModelMapper m = new ModelMapper();
+            return m.map(productoTerminado, ProductoTerminadoDTO.class);
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ProductoTerminadoDTO listarPorId(@PathVariable("id") Long id) {
         ProductoTerminado productoTerminado = productoTerminadoService.listId(id);
-        ProductoTerminadoDTO dto = new ProductoTerminadoDTO();
-        dto.setId(productoTerminado.getId());
-        dto.setNombre(productoTerminado.getNombre());
-        dto.setDescripcion(productoTerminado.getDescripcion());
-        dto.setTipo(productoTerminado.getTipo());
-        dto.setModelo(productoTerminado.getModelo());
-        dto.setColor(productoTerminado.getColor());
-        dto.setPrecioUnitario(productoTerminado.getPrecioUnitario());
-        dto.setPieza(productoTerminado.getPieza());
-        dto.setEnabled(productoTerminado.getEnabled());
-        dto.setImagen(productoTerminado.getImagen());
-        return dto;
+        ModelMapper m = new ModelMapper();
+        return m.map(productoTerminado, ProductoTerminadoDTO.class);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Long id) {
         productoTerminadoService.delete(id);
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody ProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
         ProductoTerminado productoTerminado = m.map(dto, ProductoTerminado.class);

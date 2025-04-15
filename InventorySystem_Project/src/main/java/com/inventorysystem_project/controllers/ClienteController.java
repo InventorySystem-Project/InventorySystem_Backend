@@ -23,7 +23,7 @@ public class ClienteController {
     @Autowired
     private IEmpresaService empresaService;
 
-    @PostMapping
+    @PostMapping("/registrar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody ClienteDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -40,51 +40,29 @@ public class ClienteController {
         clienteService.insert(cliente);
     }
 
-    @GetMapping
+    @GetMapping("/listar")  // Ruta para listar todos los clientes
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public List<ClienteDTO> listar() {
         return clienteService.list().stream().map(cliente -> {
-            ClienteDTO dto = new ClienteDTO();
-            dto.setId(cliente.getId());
-            if (cliente.getEmpresa() != null) {
-                dto.setEmpresaId(cliente.getEmpresa().getId());
-            }
-            dto.setCorreo(cliente.getCorreo());
-            dto.setDireccion(cliente.getDireccion());
-            dto.setTelefono(cliente.getTelefono());
-            dto.setRuc(cliente.getRuc());
-            dto.setPais(cliente.getPais());
-            dto.setTipoCliente(cliente.getTipoCliente());
-            dto.setEnabled(cliente.getEnabled());
-            return dto;
+            ModelMapper m = new ModelMapper();
+            return m.map(cliente, ClienteDTO.class);
         }).collect(Collectors.toList());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}")  // Ruta para obtener un cliente por ID
     public ClienteDTO listarPorId(@PathVariable("id") Long id) {
         Cliente cliente = clienteService.listId(id);
-        ClienteDTO dto = new ClienteDTO();
-        dto.setId(cliente.getId());
-        if (cliente.getEmpresa() != null) {
-            dto.setEmpresaId(cliente.getEmpresa().getId());
-        }
-        dto.setCorreo(cliente.getCorreo());
-        dto.setDireccion(cliente.getDireccion());
-        dto.setTelefono(cliente.getTelefono());
-        dto.setRuc(cliente.getRuc());
-        dto.setPais(cliente.getPais());
-        dto.setTipoCliente(cliente.getTipoCliente());
-        dto.setEnabled(cliente.getEnabled());
-        return dto;
+        ModelMapper m = new ModelMapper();
+        return m.map(cliente, ClienteDTO.class);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}")  // Ruta para eliminar un cliente por ID
     @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Long id) {
         clienteService.delete(id);
     }
 
-    @PutMapping
+    @PutMapping  // Ruta para modificar un cliente
     @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody ClienteDTO dto) {
         ModelMapper m = new ModelMapper();

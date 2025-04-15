@@ -5,6 +5,7 @@ import com.inventorysystem_project.entities.ProveedorMateriaPrima;
 import com.inventorysystem_project.serviceinterfaces.IProveedorMateriaPrimaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,43 +18,42 @@ public class ProveedorMateriaPrimaController {
     @Autowired
     private IProveedorMateriaPrimaService proveedorMateriaPrimaService;
 
-    @PostMapping("Registrar")
+    @PostMapping("/registrar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody ProveedorMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
-        ProveedorMateriaPrima proveedorMateriaPrima = m.map(dto, ProveedorMateriaPrima.class);
-        proveedorMateriaPrimaService.insert(proveedorMateriaPrima);
+        ProveedorMateriaPrima x = m.map(dto, ProveedorMateriaPrima.class);
+        proveedorMateriaPrimaService.insert(x);
     }
 
-    @GetMapping("Listar")
+    @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public List<ProveedorMateriaPrimaDTO> listar() {
-        return proveedorMateriaPrimaService.list().stream().map(proveedorMateriaPrima -> {
-            ProveedorMateriaPrimaDTO dto = new ProveedorMateriaPrimaDTO();
-            dto.setId(proveedorMateriaPrima.getId());
-            dto.setMateriaPrimaId(proveedorMateriaPrima.getMateriaPrima().getId());
-            dto.setProveedorId(proveedorMateriaPrima.getProveedor().getId());
-            return dto;
+        return proveedorMateriaPrimaService.list().stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, ProveedorMateriaPrimaDTO.class);
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public ProveedorMateriaPrimaDTO listarPorId(@PathVariable("id") Long id) {
-        ProveedorMateriaPrima proveedorMateriaPrima = proveedorMateriaPrimaService.listId(id);
-        ProveedorMateriaPrimaDTO dto = new ProveedorMateriaPrimaDTO();
-        dto.setId(proveedorMateriaPrima.getId());
-        dto.setMateriaPrimaId(proveedorMateriaPrima.getMateriaPrima().getId());
-        dto.setProveedorId(proveedorMateriaPrima.getProveedor().getId());
-        return dto;
+        ProveedorMateriaPrima x = proveedorMateriaPrimaService.listId(id);
+        ModelMapper m = new ModelMapper();
+        return m.map(x, ProveedorMateriaPrimaDTO.class);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Long id) {
         proveedorMateriaPrimaService.delete(id);
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody ProveedorMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
-        ProveedorMateriaPrima proveedorMateriaPrima = m.map(dto, ProveedorMateriaPrima.class);
-        proveedorMateriaPrimaService.insert(proveedorMateriaPrima);
+        ProveedorMateriaPrima x = m.map(dto, ProveedorMateriaPrima.class);
+        proveedorMateriaPrimaService.insert(x);
     }
 }

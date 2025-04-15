@@ -5,6 +5,7 @@ import com.inventorysystem_project.entities.MovimientoInventarioMateriaPrima;
 import com.inventorysystem_project.serviceinterfaces.IMovimientoInventarioMateriaPrimaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,8 @@ public class MovimientoInventarioMateriaPrimaController {
     private IMovimientoInventarioMateriaPrimaService movimientoService;
 
     // Registrar un nuevo movimiento
-    @PostMapping("Registrar")
+    @PostMapping("/registrar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody MovimientoInventarioMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
         MovimientoInventarioMateriaPrima movimiento = m.map(dto, MovimientoInventarioMateriaPrima.class);
@@ -26,46 +28,34 @@ public class MovimientoInventarioMateriaPrimaController {
     }
 
     // Listar todos los movimientos
-    @GetMapping("Listar")
+    @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public List<MovimientoInventarioMateriaPrimaDTO> listar() {
         return movimientoService.list().stream().map(movimiento -> {
-            MovimientoInventarioMateriaPrimaDTO dto = new MovimientoInventarioMateriaPrimaDTO();
-            dto.setId(movimiento.getId());
-            dto.setAlmacenId(movimiento.getAlmacen().getId());
-            dto.setMateriaPrimaId(movimiento.getMateriaPrima().getId());
-            dto.setFechaMovimiento(movimiento.getFechaMovimiento());
-            dto.setTipoMovimiento(movimiento.getTipoMovimiento());
-            dto.setCantidad(movimiento.getCantidad());
-            dto.setUnidad(movimiento.getUnidad());
-            dto.setEstadoRecepcion(movimiento.getEstadoRecepcion());
-            return dto;
+            ModelMapper m = new ModelMapper();
+            return m.map(movimiento, MovimientoInventarioMateriaPrimaDTO.class);
         }).collect(Collectors.toList());
     }
 
     // Obtener un movimiento por ID
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public MovimientoInventarioMateriaPrimaDTO listarPorId(@PathVariable("id") Long id) {
         MovimientoInventarioMateriaPrima movimiento = movimientoService.listId(id);
-        MovimientoInventarioMateriaPrimaDTO dto = new MovimientoInventarioMateriaPrimaDTO();
-        dto.setId(movimiento.getId());
-        dto.setAlmacenId(movimiento.getAlmacen().getId());
-        dto.setMateriaPrimaId(movimiento.getMateriaPrima().getId());
-        dto.setFechaMovimiento(movimiento.getFechaMovimiento());
-        dto.setTipoMovimiento(movimiento.getTipoMovimiento());
-        dto.setCantidad(movimiento.getCantidad());
-        dto.setUnidad(movimiento.getUnidad());
-        dto.setEstadoRecepcion(movimiento.getEstadoRecepcion());
-        return dto;
+        ModelMapper m = new ModelMapper();
+        return m.map(movimiento, MovimientoInventarioMateriaPrimaDTO.class);
     }
 
     // Eliminar un movimiento
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Long id) {
         movimientoService.delete(id);
     }
 
     // Modificar un movimiento
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody MovimientoInventarioMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
         MovimientoInventarioMateriaPrima movimiento = m.map(dto, MovimientoInventarioMateriaPrima.class);

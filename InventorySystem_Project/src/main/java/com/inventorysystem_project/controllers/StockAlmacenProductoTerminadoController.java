@@ -5,6 +5,7 @@ import com.inventorysystem_project.entities.StockAlmacenProductoTerminado;
 import com.inventorysystem_project.serviceinterfaces.IStockAlmacenProductoTerminadoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,49 +18,42 @@ public class StockAlmacenProductoTerminadoController {
     @Autowired
     private IStockAlmacenProductoTerminadoService stockAlmacenProductoTerminadoService;
 
-    @PostMapping("Registrar")
+    @PostMapping("/registrar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody StockAlmacenProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
-        StockAlmacenProductoTerminado stockAlmacenProductoTerminado = m.map(dto, StockAlmacenProductoTerminado.class);
-        stockAlmacenProductoTerminadoService.insert(stockAlmacenProductoTerminado);
+        StockAlmacenProductoTerminado x = m.map(dto, StockAlmacenProductoTerminado.class);
+        stockAlmacenProductoTerminadoService.insert(x);
     }
 
-    @GetMapping("Listar")
+    @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public List<StockAlmacenProductoTerminadoDTO> listar() {
-        return stockAlmacenProductoTerminadoService.list().stream().map(stockAlmacenProductoTerminado -> {
-            StockAlmacenProductoTerminadoDTO dto = new StockAlmacenProductoTerminadoDTO();
-            dto.setId(stockAlmacenProductoTerminado.getId());
-            dto.setAlmacenId(stockAlmacenProductoTerminado.getAlmacen().getId());
-            dto.setProductoTerminadoId(stockAlmacenProductoTerminado.getProductoTerminado().getId());
-            dto.setStockActual(stockAlmacenProductoTerminado.getStockActual());
-            dto.setStockMinimo(stockAlmacenProductoTerminado.getStockMinimo());
-            dto.setUltimaActualizacion(stockAlmacenProductoTerminado.getUltimaActualizacion());
-            return dto;
+        return stockAlmacenProductoTerminadoService.list().stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, StockAlmacenProductoTerminadoDTO.class);
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public StockAlmacenProductoTerminadoDTO listarPorId(@PathVariable("id") Long id) {
-        StockAlmacenProductoTerminado stockAlmacenProductoTerminado = stockAlmacenProductoTerminadoService.listId(id);
-        StockAlmacenProductoTerminadoDTO dto = new StockAlmacenProductoTerminadoDTO();
-        dto.setId(stockAlmacenProductoTerminado.getId());
-        dto.setAlmacenId(stockAlmacenProductoTerminado.getAlmacen().getId());
-        dto.setProductoTerminadoId(stockAlmacenProductoTerminado.getProductoTerminado().getId());
-        dto.setStockActual(stockAlmacenProductoTerminado.getStockActual());
-        dto.setStockMinimo(stockAlmacenProductoTerminado.getStockMinimo());
-        dto.setUltimaActualizacion(stockAlmacenProductoTerminado.getUltimaActualizacion());
-        return dto;
+        StockAlmacenProductoTerminado x = stockAlmacenProductoTerminadoService.listId(id);
+        ModelMapper m = new ModelMapper();
+        return m.map(x, StockAlmacenProductoTerminadoDTO.class);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Long id) {
         stockAlmacenProductoTerminadoService.delete(id);
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody StockAlmacenProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
-        StockAlmacenProductoTerminado stockAlmacenProductoTerminado = m.map(dto, StockAlmacenProductoTerminado.class);
-        stockAlmacenProductoTerminadoService.insert(stockAlmacenProductoTerminado);
+        StockAlmacenProductoTerminado x = m.map(dto, StockAlmacenProductoTerminado.class);
+        stockAlmacenProductoTerminadoService.insert(x);
     }
 }

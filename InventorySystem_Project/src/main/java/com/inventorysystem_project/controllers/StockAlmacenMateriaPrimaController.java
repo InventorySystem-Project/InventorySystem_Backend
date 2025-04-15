@@ -5,6 +5,7 @@ import com.inventorysystem_project.entities.StockAlmacenMateriaPrima;
 import com.inventorysystem_project.serviceinterfaces.IStockAlmacenMateriaPrimaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,49 +18,42 @@ public class StockAlmacenMateriaPrimaController {
     @Autowired
     private IStockAlmacenMateriaPrimaService stockAlmacenMateriaPrimaService;
 
-    @PostMapping("Registrar")
+    @PostMapping("/registrar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody StockAlmacenMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
-        StockAlmacenMateriaPrima stockAlmacenMateriaPrima = m.map(dto, StockAlmacenMateriaPrima.class);
-        stockAlmacenMateriaPrimaService.insert(stockAlmacenMateriaPrima);
+        StockAlmacenMateriaPrima x = m.map(dto, StockAlmacenMateriaPrima.class);
+        stockAlmacenMateriaPrimaService.insert(x);
     }
 
-    @GetMapping("Listar")
+    @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public List<StockAlmacenMateriaPrimaDTO> listar() {
-        return stockAlmacenMateriaPrimaService.list().stream().map(stockAlmacenMateriaPrima -> {
-            StockAlmacenMateriaPrimaDTO dto = new StockAlmacenMateriaPrimaDTO();
-            dto.setId(stockAlmacenMateriaPrima.getId());
-            dto.setAlmacenId(stockAlmacenMateriaPrima.getAlmacen().getId());
-            dto.setMateriaPrimaId(stockAlmacenMateriaPrima.getMateriaPrima().getId());
-            dto.setStockActual(stockAlmacenMateriaPrima.getStockActual());
-            dto.setStockMinimo(stockAlmacenMateriaPrima.getStockMinimo());
-            dto.setUltimaActualizacion(stockAlmacenMateriaPrima.getUltimaActualizacion());
-            return dto;
+        return stockAlmacenMateriaPrimaService.list().stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, StockAlmacenMateriaPrimaDTO.class);
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public StockAlmacenMateriaPrimaDTO listarPorId(@PathVariable("id") Long id) {
-        StockAlmacenMateriaPrima stockAlmacenMateriaPrima = stockAlmacenMateriaPrimaService.listId(id);
-        StockAlmacenMateriaPrimaDTO dto = new StockAlmacenMateriaPrimaDTO();
-        dto.setId(stockAlmacenMateriaPrima.getId());
-        dto.setAlmacenId(stockAlmacenMateriaPrima.getAlmacen().getId());
-        dto.setMateriaPrimaId(stockAlmacenMateriaPrima.getMateriaPrima().getId());
-        dto.setStockActual(stockAlmacenMateriaPrima.getStockActual());
-        dto.setStockMinimo(stockAlmacenMateriaPrima.getStockMinimo());
-        dto.setUltimaActualizacion(stockAlmacenMateriaPrima.getUltimaActualizacion());
-        return dto;
+        StockAlmacenMateriaPrima x = stockAlmacenMateriaPrimaService.listId(id);
+        ModelMapper m = new ModelMapper();
+        return m.map(x, StockAlmacenMateriaPrimaDTO.class);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Long id) {
         stockAlmacenMateriaPrimaService.delete(id);
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody StockAlmacenMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
-        StockAlmacenMateriaPrima stockAlmacenMateriaPrima = m.map(dto, StockAlmacenMateriaPrima.class);
-        stockAlmacenMateriaPrimaService.insert(stockAlmacenMateriaPrima);
+        StockAlmacenMateriaPrima x = m.map(dto, StockAlmacenMateriaPrima.class);
+        stockAlmacenMateriaPrimaService.insert(x);
     }
 }

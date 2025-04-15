@@ -5,6 +5,7 @@ import com.inventorysystem_project.entities.VentaProductoTerminado;
 import com.inventorysystem_project.serviceinterfaces.IVentaProductoTerminadoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,53 +18,42 @@ public class VentaProductoTerminadoController {
     @Autowired
     private IVentaProductoTerminadoService ventaProductoTerminadoService;
 
-    @PostMapping("Registrar")
+    @PostMapping("/registrar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void registrar(@RequestBody VentaProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
-        VentaProductoTerminado ventaProductoTerminado = m.map(dto, VentaProductoTerminado.class);
-        ventaProductoTerminadoService.insert(ventaProductoTerminado);
+        VentaProductoTerminado x = m.map(dto, VentaProductoTerminado.class);
+        ventaProductoTerminadoService.insert(x);
     }
 
-    @GetMapping("Listar")
+    @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public List<VentaProductoTerminadoDTO> listar() {
         return ventaProductoTerminadoService.list().stream().map(ventaProductoTerminado -> {
-            VentaProductoTerminadoDTO dto = new VentaProductoTerminadoDTO();
-            dto.setId(ventaProductoTerminado.getId());
-            dto.setAlmacenId(ventaProductoTerminado.getAlmacen().getId());
-            dto.setFechaMovimiento(ventaProductoTerminado.getFechaMovimiento());
-            dto.setTipoMovimiento(ventaProductoTerminado.getTipoMovimiento());
-            dto.setCantidad(ventaProductoTerminado.getCantidad());
-            dto.setUnidad(ventaProductoTerminado.getUnidad());
-            dto.setEstadoEntrega(ventaProductoTerminado.getEstadoEntrega());
-            dto.setProductoTerminadoId(ventaProductoTerminado.getProductoTerminado().getId());
-            return dto;
+            ModelMapper m = new ModelMapper();
+            return m.map(ventaProductoTerminado, VentaProductoTerminadoDTO.class);
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
     public VentaProductoTerminadoDTO listarPorId(@PathVariable("id") Long id) {
-        VentaProductoTerminado ventaProductoTerminado = ventaProductoTerminadoService.listId(id);
-        VentaProductoTerminadoDTO dto = new VentaProductoTerminadoDTO();
-        dto.setId(ventaProductoTerminado.getId());
-        dto.setAlmacenId(ventaProductoTerminado.getAlmacen().getId());
-        dto.setFechaMovimiento(ventaProductoTerminado.getFechaMovimiento());
-        dto.setTipoMovimiento(ventaProductoTerminado.getTipoMovimiento());
-        dto.setCantidad(ventaProductoTerminado.getCantidad());
-        dto.setUnidad(ventaProductoTerminado.getUnidad());
-        dto.setEstadoEntrega(ventaProductoTerminado.getEstadoEntrega());
-        dto.setProductoTerminadoId(ventaProductoTerminado.getProductoTerminado().getId());
-        return dto;
+        VentaProductoTerminado x = ventaProductoTerminadoService.listId(id);
+        ModelMapper m = new ModelMapper();
+        return m.map(x, VentaProductoTerminadoDTO.class);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Long id) {
         ventaProductoTerminadoService.delete(id);
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody VentaProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
-        VentaProductoTerminado ventaProductoTerminado = m.map(dto, VentaProductoTerminado.class);
-        ventaProductoTerminadoService.insert(ventaProductoTerminado);
+        VentaProductoTerminado x = m.map(dto, VentaProductoTerminado.class);
+        ventaProductoTerminadoService.insert(x);
     }
 }
