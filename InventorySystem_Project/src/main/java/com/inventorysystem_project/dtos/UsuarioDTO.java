@@ -127,11 +127,11 @@ public class UsuarioDTO {
         this.empresaId = empresaId;
     }
 
-    public List<String> getRols() {
+    public List<String> getRoles() {
         return roles;
     }
 
-    public void setRols(List<String> rols) {
-        this.roles = rols;
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 }

@@ -1,5 +1,6 @@
 package com.inventorysystem_project.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -12,6 +13,7 @@ public class DetalleOrdenCompra {
 
     @ManyToOne
     @JoinColumn(name = "orden_compra_id")
+    @JsonBackReference
     private OrdenCompra ordenCompra;
 
     @ManyToOne

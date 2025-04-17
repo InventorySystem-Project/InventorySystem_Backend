@@ -1,6 +1,9 @@
 package com.inventorysystem_project.dtos;
 
+import com.inventorysystem_project.entities.DetalleOrdenCompra;
+
 import java.util.Date;
+import java.util.List;
 
 public class OrdenCompraDTO {
 
@@ -10,7 +13,7 @@ public class OrdenCompraDTO {
     private Date fechaEmision;
     private String estado;
     private String codigoOrden;
-
+    private List<DetalleOrdenCompraDTO> detalles;
     // Getters and Setters
 
 
@@ -60,5 +63,13 @@ public class OrdenCompraDTO {
 
     public void setCodigoOrden(String codigoOrden) {
         this.codigoOrden = codigoOrden;
+    }
+
+    public List<DetalleOrdenCompraDTO> getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(List<DetalleOrdenCompraDTO> detalles) {
+        this.detalles = detalles;
     }
 }

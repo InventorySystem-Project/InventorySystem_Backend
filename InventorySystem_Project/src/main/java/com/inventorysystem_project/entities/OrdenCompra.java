@@ -1,7 +1,9 @@
 package com.inventorysystem_project.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class OrdenCompra {
@@ -23,17 +25,14 @@ public class OrdenCompra {
 
     private String estado;
 
+    @Column(name = "codigo_orden")
     private String codigoOrden;
 
+    @OneToMany(mappedBy = "ordenCompra", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<DetalleOrdenCompra> detalles; // 👈 Nueva lista de detalles
+
     // Getters and Setters
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
 
     public Long getId() {
         return id;
@@ -73,5 +72,21 @@ public class OrdenCompra {
 
     public void setCodigoOrden(String codigoOrden) {
         this.codigoOrden = codigoOrden;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public List<DetalleOrdenCompra> getDetalles() {
+        return detalles;
+    }
+
+    public void setDetalles(List<DetalleOrdenCompra> detalles) {
+        this.detalles = detalles;
     }
 }
