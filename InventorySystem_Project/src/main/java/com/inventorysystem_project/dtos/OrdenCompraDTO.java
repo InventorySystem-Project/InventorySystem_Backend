@@ -8,10 +8,11 @@ public class OrdenCompraDTO {
     private Long empresaId;
     private Long proveedorId;
     private Date fechaEmision;
-    private Double total;
+    private String estado;
     private String codigoOrden;
 
     // Getters and Setters
+
 
     public Long getId() {
         return id;
@@ -45,12 +46,12 @@ public class OrdenCompraDTO {
         this.fechaEmision = fechaEmision;
     }
 
-    public Double getTotal() {
-        return total;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setTotal(Double total) {
-        this.total = total;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getCodigoOrden() {

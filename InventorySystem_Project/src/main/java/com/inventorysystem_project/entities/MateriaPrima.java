@@ -11,14 +11,7 @@ public class MateriaPrima {
 
     private String nombre;
 
-    private String descripcion;
-
-    private Double precioUnitario;
-
     private String unidad;
-
-    private String imagen;
-
     // Getters and Setters
 
     public Long getId() {
@@ -37,22 +30,6 @@ public class MateriaPrima {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Double getPrecioUnitario() {
-        return precioUnitario;
-    }
-
-    public void setPrecioUnitario(Double precioUnitario) {
-        this.precioUnitario = precioUnitario;
-    }
-
     public String getUnidad() {
         return unidad;
     }
@@ -61,11 +38,4 @@ public class MateriaPrima {
         this.unidad = unidad;
     }
 
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
 }

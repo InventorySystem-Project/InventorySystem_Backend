@@ -21,11 +21,19 @@ public class OrdenCompra {
     @Temporal(TemporalType.DATE)
     private Date fechaEmision;
 
-    private Double total;
+    private String estado;
 
     private String codigoOrden;
 
     // Getters and Setters
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public Long getId() {
         return id;
@@ -57,14 +65,6 @@ public class OrdenCompra {
 
     public void setFechaEmision(Date fechaEmision) {
         this.fechaEmision = fechaEmision;
-    }
-
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
     }
 
     public String getCodigoOrden() {

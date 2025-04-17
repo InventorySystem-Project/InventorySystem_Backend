@@ -20,14 +20,6 @@ public class DetalleOrdenCompra {
 
     private Integer cantidad;
 
-    private Double precioUnitario;
-
-    private Double descuento;
-
-    private Double impuesto;
-
-    private Double subtotal;
-
     // Getters and Setters
 
     public Long getId() {
@@ -62,35 +54,4 @@ public class DetalleOrdenCompra {
         this.cantidad = cantidad;
     }
 
-    public Double getPrecioUnitario() {
-        return precioUnitario;
-    }
-
-    public void setPrecioUnitario(Double precioUnitario) {
-        this.precioUnitario = precioUnitario;
-    }
-
-    public Double getDescuento() {
-        return descuento;
-    }
-
-    public void setDescuento(Double descuento) {
-        this.descuento = descuento;
-    }
-
-    public Double getImpuesto() {
-        return impuesto;
-    }
-
-    public void setImpuesto(Double impuesto) {
-        this.impuesto = impuesto;
-    }
-
-    public Double getSubtotal() {
-        return subtotal;
-    }
-
-    public void setSubtotal(Double subtotal) {
-        this.subtotal = subtotal;
-    }
 }
