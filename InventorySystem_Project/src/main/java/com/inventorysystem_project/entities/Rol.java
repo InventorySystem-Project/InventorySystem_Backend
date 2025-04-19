@@ -1,8 +1,10 @@
 package com.inventorysystem_project.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -17,32 +19,16 @@ public class Rol implements Serializable {
 	private Long id;
 
 	private String rol;
-	
-	@ManyToOne
-	@JoinColumn(name="user_id", nullable=false)
-	@JsonBackReference
-	private Usuario user;
+	@OneToMany(mappedBy = "rol") // Un rol puede tener muchos usuarios
+	//@JsonBackReference
+	@JsonIgnore
+	private List<Usuario> usuarios;
 
-	public Rol(Long id, String rol, Usuario user) {
-		this.id = id;
-		this.rol = rol;
-		this.user = user;
-	}
 
-	public Rol() {
-
-	}
 
 
 	//GETTERS AND SETTERES
 
-	public Usuario getUser() {
-		return user;
-	}
-
-	public void setUser(Usuario user) {
-		this.user = user;
-	}
 
 	public Long getId() {
 		return id;
@@ -60,4 +46,11 @@ public class Rol implements Serializable {
 		this.rol = rol;
 	}
 
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
 }

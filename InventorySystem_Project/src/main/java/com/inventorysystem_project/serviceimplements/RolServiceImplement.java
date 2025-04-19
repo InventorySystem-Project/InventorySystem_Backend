@@ -1,5 +1,7 @@
 package com.inventorysystem_project.serviceimplements;
 
+import com.inventorysystem_project.entities.Usuario;
+import com.inventorysystem_project.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.Service;
 import com.inventorysystem_project.entities.Rol;
@@ -24,14 +26,13 @@ public class RolServiceImplement implements IRolService {
     }
 
     @Override
-    public void delete(int idRol) {
-
-    }
+    public void delete(Long idRol) { rolR.deleteById(idRol);}
 
     @Override
-    public Rol listId(int idRol) {
-        return null;
+    public Rol listId(Long idRol) {
+        return rolR.findById(idRol).orElse(null);
     }
+
 
 
 }

@@ -7,7 +7,6 @@ public class RolDTO {
     private Long id;
     private String rol;
 
-    private Usuario user;
 
     public Long getId() {
         return id;
@@ -25,13 +24,6 @@ public class RolDTO {
         this.rol = rol;
     }
 
-    public Usuario getUser() {
-        return user;
-    }
-
-    public void setUser(Usuario user) {
-        this.user = user;
-    }
 }
 
 

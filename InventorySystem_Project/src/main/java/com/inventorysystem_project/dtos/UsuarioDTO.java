@@ -1,33 +1,36 @@
 package com.inventorysystem_project.dtos;
 
 import com.inventorysystem_project.entities.Empresa;
+import com.inventorysystem_project.entities.Rol;
 
 import java.util.Date;
 import java.util.List;
 
 public class UsuarioDTO {
 
-    private String id;  // Cambié a String
+    private Long id;  // Cambié a String
     private String nombre;
     private String apellido;
     private String correo;
     private String password;
     private String username;
     private String genero;
-    private int dni;
+    private Long dni;
     private String foto;
     private Date fechaNacimiento;
-    private int telefono;
+    private Long telefono;
     private Boolean enabled;
-    private Empresa empresaId;  // Cambié a Empresa
-    private List<String> roles;  // Cambié a List<String> para manejar los nombres de los roles
+    private Empresa empresa;  // Cambié a Empresa
+    private Rol rol;  // Cambié a List<String> para manejar los nombres de los roles
 
     // Getters and Setters
-    public String getId() {
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -79,11 +82,11 @@ public class UsuarioDTO {
         this.genero = genero;
     }
 
-    public int getDni() {
+    public Long getDni() {
         return dni;
     }
 
-    public void setDni(int dni) {
+    public void setDni(Long dni) {
         this.dni = dni;
     }
 
@@ -103,11 +106,11 @@ public class UsuarioDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public int getTelefono() {
+    public Long getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(Long telefono) {
         this.telefono = telefono;
     }
 
@@ -119,19 +122,19 @@ public class UsuarioDTO {
         this.enabled = enabled;
     }
 
-    public Empresa getEmpresaId() {
-        return empresaId;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setEmpresaId(Empresa empresaId) {
-        this.empresaId = empresaId;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
     }
 
-    public List<String> getRoles() {
-        return roles;
+    public Rol getRol() {
+        return rol;
     }
 
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 }

@@ -2,7 +2,6 @@ package com.inventorysystem_project.entities;
 
 import jakarta.persistence.*;
 import java.util.Date;
-import java.util.List;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -12,43 +11,46 @@ public class Usuario {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length = 50)
+	@Column(length = 50, nullable = true)  // Permite que 'nombre' sea nulo
 	private String nombre;
 
-	@Column(length = 50)
+	@Column(length = 50, nullable = true)  // Permite que 'apellido' sea nulo
 	private String apellido;
 
-	@Column(length = 100)
+	@Column(length = 100, nullable = true)  // Permite que 'correo' sea nulo
 	private String correo;
 
-	@Column(length = 200)
+	@Column(length = 200, nullable = true)  // Permite que 'password' sea nulo
 	private String password;
 
-	@Column(length = 50)
+	@Column(length = 50, nullable = true)  // Permite que 'username' sea nulo
 	private String username;
 
-	@Column(length = 50)
+	@Column(length = 50, nullable = true)  // Permite que 'genero' sea nulo
 	private String genero;
 
-	private int dni;
+	@Column(nullable = true)  // Permite que 'dni' sea nulo
+	private Long dni;
 
-	@Column(length = 100)
+	@Column(length = 100, nullable = true)  // Permite que 'foto' sea nulo
 	private String foto;
 
+	@Column(nullable = true)  // Permite que 'fechaNacimiento' sea nulo
 	private Date fechaNacimiento;
 
-	private int telefono;
+	@Column(nullable = true)  // Permite que 'telefono' sea nulo
+	private Long telefono;
 
+	@Column(nullable = true)  // Permite que 'enabled' sea nulo
 	private Boolean enabled;
 
 	@ManyToOne
-	@JoinColumn(name = "empresa_id", referencedColumnName = "id")
+	@JoinColumn(name = "empresa_id", referencedColumnName = "id", nullable = true)  // Permite que la relación con 'empresa' sea nula
 	private Empresa empresa;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "user_id")
-	@JsonManagedReference
-	private List<Rol> roles;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "rol_id", nullable = true)  // Permite que la relación con 'rol' sea nula
+	private Rol rol; // Un usuario tiene un solo rol
 
 	// Getters and Setters
 
@@ -108,11 +110,11 @@ public class Usuario {
 		this.genero = genero;
 	}
 
-	public int getDni() {
+	public Long getDni() {
 		return dni;
 	}
 
-	public void setDni(int dni) {
+	public void setDni(Long dni) {
 		this.dni = dni;
 	}
 
@@ -132,11 +134,11 @@ public class Usuario {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
-	public int getTelefono() {
+	public Long getTelefono() {
 		return telefono;
 	}
 
-	public void setTelefono(int telefono) {
+	public void setTelefono(Long telefono) {
 		this.telefono = telefono;
 	}
 
@@ -156,11 +158,11 @@ public class Usuario {
 		this.empresa = empresa;
 	}
 
-	public List<Rol> getRoles() {
-		return roles;
+	public Rol getRol() {
+		return rol;
 	}
 
-	public void setRoles(List<Rol> roles) {
-		this.roles = roles;
+	public void setRol(Rol rol) {
+		this.rol = rol;
 	}
 }
