@@ -32,9 +32,6 @@ public class Usuario {
 	@Column(nullable = true)  // Permite que 'dni' sea nulo
 	private Long dni;
 
-	@Column(length = 100, nullable = true)  // Permite que 'foto' sea nulo
-	private String foto;
-
 	@Column(nullable = true)  // Permite que 'fechaNacimiento' sea nulo
 	private Date fechaNacimiento;
 
@@ -116,14 +113,6 @@ public class Usuario {
 
 	public void setDni(Long dni) {
 		this.dni = dni;
-	}
-
-	public String getFoto() {
-		return foto;
-	}
-
-	public void setFoto(String foto) {
-		this.foto = foto;
 	}
 
 	public Date getFechaNacimiento() {

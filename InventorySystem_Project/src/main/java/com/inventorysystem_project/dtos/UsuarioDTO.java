@@ -16,11 +16,10 @@ public class UsuarioDTO {
     private String username;
     private String genero;
     private Long dni;
-    private String foto;
     private Date fechaNacimiento;
     private Long telefono;
     private Boolean enabled;
-    private Empresa empresa;  // Cambié a Empresa
+    private Long empresaId;  // Cambié a Empresa
     private Rol rol;  // Cambié a List<String> para manejar los nombres de los roles
 
     // Getters and Setters
@@ -90,14 +89,6 @@ public class UsuarioDTO {
         this.dni = dni;
     }
 
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
     public Date getFechaNacimiento() {
         return fechaNacimiento;
     }
@@ -122,12 +113,12 @@ public class UsuarioDTO {
         this.enabled = enabled;
     }
 
-    public Empresa getEmpresa() {
-        return empresa;
+    public Long getEmpresaId() {
+        return empresaId;
     }
 
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
+    public void setEmpresaId(Long empresaId) {
+        this.empresaId = empresaId;
     }
 
     public Rol getRol() {

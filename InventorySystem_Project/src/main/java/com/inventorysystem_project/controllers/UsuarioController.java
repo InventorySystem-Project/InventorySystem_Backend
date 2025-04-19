@@ -51,7 +51,6 @@ public class UsuarioController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario usuario = m.map(dto, Usuario.class);
