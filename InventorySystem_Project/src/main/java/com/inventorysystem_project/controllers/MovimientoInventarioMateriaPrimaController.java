@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/movimientos")
+@RequestMapping("/movimientos-materia-prima")
 public class MovimientoInventarioMateriaPrimaController {
 
     @Autowired

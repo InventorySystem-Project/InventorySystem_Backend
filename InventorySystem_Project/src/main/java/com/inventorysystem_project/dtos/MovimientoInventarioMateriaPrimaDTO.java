@@ -10,8 +10,7 @@ public class MovimientoInventarioMateriaPrimaDTO {
     private Date fechaMovimiento;
     private String tipoMovimiento;
     private Integer cantidad;
-    private Integer unidad;
-    private String estadoRecepcion;
+    private String motivo;
 
     // Getters y Setters
     public Long getId() {
@@ -62,19 +61,11 @@ public class MovimientoInventarioMateriaPrimaDTO {
         this.cantidad = cantidad;
     }
 
-    public Integer getUnidad() {
-        return unidad;
+    public String getMotivo() {
+        return motivo;
     }
 
-    public void setUnidad(Integer unidad) {
-        this.unidad = unidad;
-    }
-
-    public String getEstadoRecepcion() {
-        return estadoRecepcion;
-    }
-
-    public void setEstadoRecepcion(String estadoRecepcion) {
-        this.estadoRecepcion = estadoRecepcion;
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
     }
 }

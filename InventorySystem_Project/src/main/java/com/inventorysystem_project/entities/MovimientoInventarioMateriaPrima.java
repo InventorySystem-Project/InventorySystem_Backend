@@ -29,13 +29,11 @@ public class MovimientoInventarioMateriaPrima implements Serializable {
     @Column(name = "cantidad")
     private Integer cantidad;
 
-    @Column(name = "unidad")
-    private Integer unidad;
-
-    @Column(name = "estado_recepcion", length = 50)
-    private String estadoRecepcion;
+    @Column(name = "motivo", length = 50)
+    private String motivo;
 
     // Getters y Setters
+
     public Long getId() {
         return id;
     }
@@ -84,19 +82,11 @@ public class MovimientoInventarioMateriaPrima implements Serializable {
         this.cantidad = cantidad;
     }
 
-    public Integer getUnidad() {
-        return unidad;
+    public String getMotivo() {
+        return motivo;
     }
 
-    public void setUnidad(Integer unidad) {
-        this.unidad = unidad;
-    }
-
-    public String getEstadoRecepcion() {
-        return estadoRecepcion;
-    }
-
-    public void setEstadoRecepcion(String estadoRecepcion) {
-        this.estadoRecepcion = estadoRecepcion;
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
     }
 }
