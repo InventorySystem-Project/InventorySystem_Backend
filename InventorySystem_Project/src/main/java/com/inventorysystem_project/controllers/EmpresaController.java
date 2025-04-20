@@ -19,7 +19,7 @@ public class EmpresaController {
     private IEmpresaService empresaService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody EmpresaDTO dto) {
         ModelMapper m = new ModelMapper();
         Empresa empresa = m.map(dto, Empresa.class);
@@ -27,7 +27,7 @@ public class EmpresaController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<EmpresaDTO> listar() {
         return empresaService.list().stream().map(empresa -> {
             ModelMapper m = new ModelMapper();
@@ -36,7 +36,7 @@ public class EmpresaController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public EmpresaDTO listarPorId(@PathVariable("id") Long id) {
         Empresa empresa = empresaService.listId(id);
         ModelMapper m = new ModelMapper();
@@ -44,13 +44,13 @@ public class EmpresaController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         empresaService.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody EmpresaDTO dto) {
         ModelMapper m = new ModelMapper();
         Empresa empresa = m.map(dto, Empresa.class);

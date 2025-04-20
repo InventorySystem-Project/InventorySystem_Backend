@@ -19,7 +19,7 @@ public class VentaProductoTerminadoController {
     private IVentaProductoTerminadoService ventaProductoTerminadoService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody VentaProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
         VentaProductoTerminado x = m.map(dto, VentaProductoTerminado.class);
@@ -27,7 +27,7 @@ public class VentaProductoTerminadoController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<VentaProductoTerminadoDTO> listar() {
         return ventaProductoTerminadoService.list().stream().map(ventaProductoTerminado -> {
             ModelMapper m = new ModelMapper();
@@ -36,7 +36,7 @@ public class VentaProductoTerminadoController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public VentaProductoTerminadoDTO listarPorId(@PathVariable("id") Long id) {
         VentaProductoTerminado x = ventaProductoTerminadoService.listId(id);
         ModelMapper m = new ModelMapper();
@@ -44,13 +44,13 @@ public class VentaProductoTerminadoController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         ventaProductoTerminadoService.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody VentaProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
         VentaProductoTerminado x = m.map(dto, VentaProductoTerminado.class);

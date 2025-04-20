@@ -19,7 +19,7 @@ public class MateriaPrimaController {
     private IMateriaPrimaService materiaPrimaService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody MateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
         MateriaPrima materiaPrima = m.map(dto, MateriaPrima.class);
@@ -27,7 +27,7 @@ public class MateriaPrimaController {
     }
 
     @GetMapping("listar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<MateriaPrimaDTO> listar() {
         return materiaPrimaService.list().stream().map(materiaPrima -> {
             ModelMapper m = new ModelMapper();
@@ -36,7 +36,7 @@ public class MateriaPrimaController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public MateriaPrimaDTO listarPorId(@PathVariable("id") Long id) {
         MateriaPrima materiaPrima = materiaPrimaService.listId(id);
         ModelMapper m = new ModelMapper();
@@ -44,13 +44,13 @@ public class MateriaPrimaController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         materiaPrimaService.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody MateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
         MateriaPrima materiaPrima = m.map(dto, MateriaPrima.class);

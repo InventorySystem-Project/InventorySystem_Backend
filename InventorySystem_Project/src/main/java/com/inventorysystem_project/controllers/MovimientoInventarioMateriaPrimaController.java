@@ -20,7 +20,7 @@ public class MovimientoInventarioMateriaPrimaController {
 
     // Registrar un nuevo movimiento
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody MovimientoInventarioMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
         MovimientoInventarioMateriaPrima movimiento = m.map(dto, MovimientoInventarioMateriaPrima.class);
@@ -29,7 +29,7 @@ public class MovimientoInventarioMateriaPrimaController {
 
     // Listar todos los movimientos
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<MovimientoInventarioMateriaPrimaDTO> listar() {
         return movimientoService.list().stream().map(movimiento -> {
             ModelMapper m = new ModelMapper();
@@ -39,7 +39,7 @@ public class MovimientoInventarioMateriaPrimaController {
 
     // Obtener un movimiento por ID
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public MovimientoInventarioMateriaPrimaDTO listarPorId(@PathVariable("id") Long id) {
         MovimientoInventarioMateriaPrima movimiento = movimientoService.listId(id);
         ModelMapper m = new ModelMapper();
@@ -48,14 +48,14 @@ public class MovimientoInventarioMateriaPrimaController {
 
     // Eliminar un movimiento
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         movimientoService.delete(id);
     }
 
     // Modificar un movimiento
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody MovimientoInventarioMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
         MovimientoInventarioMateriaPrima movimiento = m.map(dto, MovimientoInventarioMateriaPrima.class);

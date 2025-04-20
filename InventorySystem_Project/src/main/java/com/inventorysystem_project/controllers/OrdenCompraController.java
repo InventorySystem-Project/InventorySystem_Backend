@@ -28,7 +28,7 @@ public class OrdenCompraController {
     private IDetalleOrdenCompraService detalleOrdenCompraService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     @Transactional
     public void registrar(@RequestBody OrdenCompraDTO dto) {
         ModelMapper m = new ModelMapper();
@@ -58,7 +58,7 @@ public class OrdenCompraController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<OrdenCompraDTO> listar() {
         return ordenCompraService.list().stream().map(ordenCompra -> {
             ModelMapper m = new ModelMapper();
@@ -67,7 +67,7 @@ public class OrdenCompraController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public OrdenCompraDTO listarPorId(@PathVariable("id") Long id) {
         OrdenCompra ordenCompra = ordenCompraService.listId(id);
         ModelMapper m = new ModelMapper();
@@ -75,13 +75,13 @@ public class OrdenCompraController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         ordenCompraService.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody OrdenCompraDTO dto) {
         ModelMapper m = new ModelMapper();
         OrdenCompra ordenCompra = m.map(dto, OrdenCompra.class);

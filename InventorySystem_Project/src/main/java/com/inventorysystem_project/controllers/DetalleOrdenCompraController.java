@@ -19,7 +19,7 @@ public class DetalleOrdenCompraController {
     private IDetalleOrdenCompraService detalleOrdenCompraService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody DetalleOrdenCompraDTO dto) {
         ModelMapper m = new ModelMapper();
         DetalleOrdenCompra detalleOrdenCompra = m.map(dto, DetalleOrdenCompra.class);
@@ -27,7 +27,7 @@ public class DetalleOrdenCompraController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<DetalleOrdenCompraDTO> listar() {
         return detalleOrdenCompraService.list().stream().map(detalleOrdenCompra -> {
             ModelMapper m = new ModelMapper();
@@ -36,7 +36,7 @@ public class DetalleOrdenCompraController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public DetalleOrdenCompraDTO listarPorId(@PathVariable("id") Long id) {
         DetalleOrdenCompra detalleOrdenCompra = detalleOrdenCompraService.listId(id);
         ModelMapper m = new ModelMapper();
@@ -44,13 +44,13 @@ public class DetalleOrdenCompraController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         detalleOrdenCompraService.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody DetalleOrdenCompraDTO dto) {
         ModelMapper m = new ModelMapper();
         DetalleOrdenCompra detalleOrdenCompra = m.map(dto, DetalleOrdenCompra.class);

@@ -19,7 +19,7 @@ public class StockAlmacenMateriaPrimaController {
     private IStockAlmacenMateriaPrimaService stockAlmacenMateriaPrimaService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody StockAlmacenMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
         StockAlmacenMateriaPrima x = m.map(dto, StockAlmacenMateriaPrima.class);
@@ -27,7 +27,7 @@ public class StockAlmacenMateriaPrimaController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<StockAlmacenMateriaPrimaDTO> listar() {
         return stockAlmacenMateriaPrimaService.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -36,7 +36,7 @@ public class StockAlmacenMateriaPrimaController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public StockAlmacenMateriaPrimaDTO listarPorId(@PathVariable("id") Long id) {
         StockAlmacenMateriaPrima x = stockAlmacenMateriaPrimaService.listId(id);
         ModelMapper m = new ModelMapper();
@@ -44,13 +44,13 @@ public class StockAlmacenMateriaPrimaController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         stockAlmacenMateriaPrimaService.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody StockAlmacenMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
         StockAlmacenMateriaPrima x = m.map(dto, StockAlmacenMateriaPrima.class);

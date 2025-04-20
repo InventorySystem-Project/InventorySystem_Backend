@@ -24,7 +24,7 @@ public class AlmacenController {
     private IEmpresaService empresaService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody AlmacenDTO dto) {
         ModelMapper m = new ModelMapper();
         Almacen almacen = m.map(dto, Almacen.class);
@@ -41,7 +41,7 @@ public class AlmacenController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<AlmacenDTO> listar() {
         return almacenService.list().stream().map(almacen -> {
             AlmacenDTO dto = new AlmacenDTO();
@@ -56,7 +56,7 @@ public class AlmacenController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public AlmacenDTO listarPorId(@PathVariable("id") Long id) {
         Almacen almacen = almacenService.listId(id);
         AlmacenDTO dto = new AlmacenDTO();
@@ -70,13 +70,13 @@ public class AlmacenController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         almacenService.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody AlmacenDTO dto) {
         ModelMapper m = new ModelMapper();
         Almacen almacen = m.map(dto, Almacen.class);

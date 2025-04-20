@@ -19,7 +19,7 @@ public class StockAlmacenProductoTerminadoController {
     private IStockAlmacenProductoTerminadoService stockAlmacenProductoTerminadoService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody StockAlmacenProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
         StockAlmacenProductoTerminado x = m.map(dto, StockAlmacenProductoTerminado.class);
@@ -27,7 +27,7 @@ public class StockAlmacenProductoTerminadoController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<StockAlmacenProductoTerminadoDTO> listar() {
         return stockAlmacenProductoTerminadoService.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -36,7 +36,7 @@ public class StockAlmacenProductoTerminadoController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public StockAlmacenProductoTerminadoDTO listarPorId(@PathVariable("id") Long id) {
         StockAlmacenProductoTerminado x = stockAlmacenProductoTerminadoService.listId(id);
         ModelMapper m = new ModelMapper();
@@ -44,13 +44,13 @@ public class StockAlmacenProductoTerminadoController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         stockAlmacenProductoTerminadoService.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody StockAlmacenProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
         StockAlmacenProductoTerminado x = m.map(dto, StockAlmacenProductoTerminado.class);

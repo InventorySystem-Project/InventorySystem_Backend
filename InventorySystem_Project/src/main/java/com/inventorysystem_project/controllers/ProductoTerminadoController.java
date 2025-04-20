@@ -19,7 +19,7 @@ public class ProductoTerminadoController {
     private IProductoTerminadoService productoTerminadoService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody ProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
         ProductoTerminado productoTerminado = m.map(dto, ProductoTerminado.class);
@@ -27,7 +27,7 @@ public class ProductoTerminadoController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<ProductoTerminadoDTO> listar() {
         return productoTerminadoService.list().stream().map(productoTerminado -> {
             ModelMapper m = new ModelMapper();
@@ -36,7 +36,7 @@ public class ProductoTerminadoController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public ProductoTerminadoDTO listarPorId(@PathVariable("id") Long id) {
         ProductoTerminado productoTerminado = productoTerminadoService.listId(id);
         ModelMapper m = new ModelMapper();
@@ -44,13 +44,13 @@ public class ProductoTerminadoController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         productoTerminadoService.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody ProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
         ProductoTerminado productoTerminado = m.map(dto, ProductoTerminado.class);

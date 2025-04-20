@@ -19,7 +19,7 @@ public class ProveedorMateriaPrimaController {
     private IProveedorMateriaPrimaService proveedorMateriaPrimaService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody ProveedorMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
         ProveedorMateriaPrima x = m.map(dto, ProveedorMateriaPrima.class);
@@ -27,7 +27,7 @@ public class ProveedorMateriaPrimaController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<ProveedorMateriaPrimaDTO> listar() {
         return proveedorMateriaPrimaService.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -36,7 +36,7 @@ public class ProveedorMateriaPrimaController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public ProveedorMateriaPrimaDTO listarPorId(@PathVariable("id") Long id) {
         ProveedorMateriaPrima x = proveedorMateriaPrimaService.listId(id);
         ModelMapper m = new ModelMapper();
@@ -44,13 +44,13 @@ public class ProveedorMateriaPrimaController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         proveedorMateriaPrimaService.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody ProveedorMateriaPrimaDTO dto) {
         ModelMapper m = new ModelMapper();
         ProveedorMateriaPrima x = m.map(dto, ProveedorMateriaPrima.class);

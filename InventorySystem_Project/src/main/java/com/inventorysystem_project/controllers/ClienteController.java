@@ -24,7 +24,7 @@ public class ClienteController {
     private IEmpresaService empresaService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody ClienteDTO dto) {
         ModelMapper m = new ModelMapper();
         Cliente cliente = m.map(dto, Cliente.class);
@@ -41,7 +41,7 @@ public class ClienteController {
     }
 
     @GetMapping("/listar")  // Ruta para listar todos los clientes
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<ClienteDTO> listar() {
         return clienteService.list().stream().map(cliente -> {
             ModelMapper m = new ModelMapper();
@@ -57,13 +57,13 @@ public class ClienteController {
     }
 
     @DeleteMapping("/{id}")  // Ruta para eliminar un cliente por ID
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         clienteService.delete(id);
     }
 
     @PutMapping  // Ruta para modificar un cliente
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody ClienteDTO dto) {
         ModelMapper m = new ModelMapper();
         Cliente cliente = m.map(dto, Cliente.class);

@@ -19,7 +19,7 @@ public class UsuarioController {
     private IUsuarioService usuarioService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody UsuarioDTO dto) {
         ModelMapper m = new ModelMapper();
         Usuario usuario = m.map(dto, Usuario.class);
@@ -28,7 +28,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<UsuarioDTO> listar() {
         return usuarioService.list().stream().map(usuario -> {
             ModelMapper m = new ModelMapper();
@@ -37,7 +37,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public UsuarioDTO listarPorId(@PathVariable("id") Long id) {
         Usuario usuario = usuarioService.listId(id);
         ModelMapper m = new ModelMapper();
@@ -45,7 +45,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         usuarioService.delete(id);
     }

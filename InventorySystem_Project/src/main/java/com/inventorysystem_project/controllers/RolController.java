@@ -19,14 +19,14 @@ public class RolController {
     private IRolService rolR;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody RolDTO dto){
         ModelMapper m=new ModelMapper();
         Rol d=m.map(dto, Rol.class);
         rolR.insert(d);
     }
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<RolDTO> listar(){
         return rolR.list().stream().map(x->{
             ModelMapper m=new ModelMapper();
@@ -40,7 +40,7 @@ public class RolController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody RolDTO dto){
         ModelMapper m=new ModelMapper();
         Rol d=m.map(dto, Rol.class);

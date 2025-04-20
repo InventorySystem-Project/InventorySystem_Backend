@@ -19,7 +19,7 @@ public class ProveedorController {
     private IProveedorService proveedorService;
 
     @PostMapping("/registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody ProveedorDTO dto) {
         ModelMapper m = new ModelMapper();
         Proveedor proveedor = m.map(dto, Proveedor.class);
@@ -27,7 +27,7 @@ public class ProveedorController {
     }
 
     @GetMapping("/listar")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<ProveedorDTO> listar() {
         return proveedorService.list().stream().map(proveedor -> {
             ModelMapper m = new ModelMapper();
@@ -36,7 +36,7 @@ public class ProveedorController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public ProveedorDTO listarPorId(@PathVariable("id") Long id) {
         Proveedor proveedor = proveedorService.listId(id);
         ModelMapper m = new ModelMapper();
@@ -44,13 +44,13 @@ public class ProveedorController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void eliminar(@PathVariable("id") Long id) {
         proveedorService.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody ProveedorDTO dto) {
         ModelMapper m = new ModelMapper();
         Proveedor proveedor = m.map(dto, Proveedor.class);
