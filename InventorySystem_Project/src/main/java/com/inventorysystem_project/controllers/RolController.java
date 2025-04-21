@@ -7,26 +7,26 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.inventorysystem_project.dtos.RolDTO;
-import com.inventorysystem_project.entities.Role;
+import com.inventorysystem_project.entities.Rol;
 import com.inventorysystem_project.serviceinterfaces.IRolService;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/roles")
-public class RoleController {
+public class RolController {
     @Autowired
     private IRolService rolR;
-    @PostMapping("Registrar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+
+    @PostMapping("/registrar")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody RolDTO dto){
         ModelMapper m=new ModelMapper();
-        Role d=m.map(dto, Role.class);
+        Rol d=m.map(dto, Rol.class);
         rolR.insert(d);
     }
-    @GetMapping("Listar")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/listar")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public List<RolDTO> listar(){
         return rolR.list().stream().map(x->{
             ModelMapper m=new ModelMapper();
@@ -34,16 +34,16 @@ public class RoleController {
         }).collect(Collectors.toList());
     }
 
-    @DeleteMapping("Eliminar/{id}")
-    public void eliminar(@PathVariable("id")Integer id){
+    @DeleteMapping("/eliminar/{id}")
+    public void eliminar(@PathVariable("id")Long id){
         rolR.delete(id);
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void modificar(@RequestBody RolDTO dto){
         ModelMapper m=new ModelMapper();
-        Role d=m.map(dto, Role.class);
+        Rol d=m.map(dto, Rol.class);
         rolR.insert(d);
     }
 }
