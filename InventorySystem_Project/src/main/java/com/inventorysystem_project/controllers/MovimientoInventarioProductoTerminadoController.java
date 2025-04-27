@@ -1,8 +1,8 @@
 package com.inventorysystem_project.controllers;
 
-import com.inventorysystem_project.dtos.VentaProductoTerminadoDTO;
-import com.inventorysystem_project.entities.VentaProductoTerminado;
-import com.inventorysystem_project.serviceinterfaces.IVentaProductoTerminadoService;
+import com.inventorysystem_project.dtos.MovimientoInventarioProductoTerminadoDTO;
+import com.inventorysystem_project.entities.MovimientoInventarioProductoTerminado;
+import com.inventorysystem_project.serviceinterfaces.IMovimientoInventarioProductoTerminadoService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,35 +12,35 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/venta-producto-terminado")
-public class VentaProductoTerminadoController {
+@RequestMapping("/movimientos-producto-terminado")
+public class MovimientoInventarioProductoTerminadoController {
 
     @Autowired
-    private IVentaProductoTerminadoService ventaProductoTerminadoService;
+    private IMovimientoInventarioProductoTerminadoService ventaProductoTerminadoService;
 
     @PostMapping("/registrar")
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
-    public void registrar(@RequestBody VentaProductoTerminadoDTO dto) {
+    public void registrar(@RequestBody MovimientoInventarioProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
-        VentaProductoTerminado x = m.map(dto, VentaProductoTerminado.class);
+        MovimientoInventarioProductoTerminado x = m.map(dto, MovimientoInventarioProductoTerminado.class);
         ventaProductoTerminadoService.insert(x);
     }
 
     @GetMapping("/listar")
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
-    public List<VentaProductoTerminadoDTO> listar() {
+    public List<MovimientoInventarioProductoTerminadoDTO> listar() {
         return ventaProductoTerminadoService.list().stream().map(ventaProductoTerminado -> {
             ModelMapper m = new ModelMapper();
-            return m.map(ventaProductoTerminado, VentaProductoTerminadoDTO.class);
+            return m.map(ventaProductoTerminado, MovimientoInventarioProductoTerminadoDTO.class);
         }).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
-    public VentaProductoTerminadoDTO listarPorId(@PathVariable("id") Long id) {
-        VentaProductoTerminado x = ventaProductoTerminadoService.listId(id);
+    public MovimientoInventarioProductoTerminadoDTO listarPorId(@PathVariable("id") Long id) {
+        MovimientoInventarioProductoTerminado x = ventaProductoTerminadoService.listId(id);
         ModelMapper m = new ModelMapper();
-        return m.map(x, VentaProductoTerminadoDTO.class);
+        return m.map(x, MovimientoInventarioProductoTerminadoDTO.class);
     }
 
     @DeleteMapping("/{id}")
@@ -51,9 +51,9 @@ public class VentaProductoTerminadoController {
 
     @PutMapping
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
-    public void modificar(@RequestBody VentaProductoTerminadoDTO dto) {
+    public void modificar(@RequestBody MovimientoInventarioProductoTerminadoDTO dto) {
         ModelMapper m = new ModelMapper();
-        VentaProductoTerminado x = m.map(dto, VentaProductoTerminado.class);
+        MovimientoInventarioProductoTerminado x = m.map(dto, MovimientoInventarioProductoTerminado.class);
         ventaProductoTerminadoService.insert(x);
     }
 }
