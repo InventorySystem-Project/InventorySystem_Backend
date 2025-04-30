@@ -11,8 +11,6 @@ public class ProductoTerminado {
 
     private String nombre;
 
-    private String descripcion;
-
     private String tipo;
 
     private String modelo;
@@ -21,13 +19,6 @@ public class ProductoTerminado {
 
     private Double precioUnitario;
 
-    private String pieza;
-
-    private Boolean enabled;
-
-    private String imagen;
-
-    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -43,14 +34,6 @@ public class ProductoTerminado {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
     }
 
     public String getTipo() {
@@ -83,29 +66,5 @@ public class ProductoTerminado {
 
     public void setPrecioUnitario(Double precioUnitario) {
         this.precioUnitario = precioUnitario;
-    }
-
-    public String getPieza() {
-        return pieza;
-    }
-
-    public void setPieza(String pieza) {
-        this.pieza = pieza;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
     }
 }

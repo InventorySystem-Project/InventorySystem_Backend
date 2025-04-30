@@ -13,4 +13,7 @@ public interface IMovimientoInventarioMateriaPrimaService {
     void delete(Long id);
 
     MovimientoInventarioMateriaPrima listId(Long id);
+
+
+
 }

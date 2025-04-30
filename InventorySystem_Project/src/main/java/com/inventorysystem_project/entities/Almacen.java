@@ -40,7 +40,7 @@ public class Almacen implements Serializable {
 
     @OneToMany(mappedBy = "almacen", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<VentaProductoTerminado> ventasProductoTerminado;
+    private List<MovimientoInventarioProductoTerminado> ventasProductoTerminado;
 
     // Getters y Setters
     public Long getId() {
@@ -99,11 +99,11 @@ public class Almacen implements Serializable {
         this.stockProductoTerminado = stockProductoTerminado;
     }
 
-    public List<VentaProductoTerminado> getVentasProductoTerminado() {
+    public List<MovimientoInventarioProductoTerminado> getVentasProductoTerminado() {
         return ventasProductoTerminado;
     }
 
-    public void setVentasProductoTerminado(List<VentaProductoTerminado> ventasProductoTerminado) {
+    public void setVentasProductoTerminado(List<MovimientoInventarioProductoTerminado> ventasProductoTerminado) {
         this.ventasProductoTerminado = ventasProductoTerminado;
     }
 }
