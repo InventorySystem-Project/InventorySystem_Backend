@@ -32,6 +32,9 @@ public class MovimientoInventarioMateriaPrima implements Serializable {
     @Column(name = "motivo", length = 50)
     private String motivo;
 
+    @Column(name = "estado_recepcion", columnDefinition = "BOOLEAN DEFAULT false")
+    private Boolean estadoRecepcion = false; // Establecemos el valor por defecto como false
+
     // Getters y Setters
 
     public Long getId() {
@@ -88,5 +91,13 @@ public class MovimientoInventarioMateriaPrima implements Serializable {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
+    }
+
+    public Boolean getEstadoRecepcion() {
+        return estadoRecepcion;
+    }
+
+    public void setEstadoRecepcion(Boolean estadoRecepcion) {
+        this.estadoRecepcion = estadoRecepcion;
     }
 }

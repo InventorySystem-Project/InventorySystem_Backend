@@ -27,8 +27,10 @@ public class MovimientoInventarioProductoTerminado {
 
     private String motivo;
 
-    // Getters and Setters
+    @Column(name = "estado_entrega", columnDefinition = "BOOLEAN DEFAULT false")
+    private Boolean estadoEntrega = false;  // Establecemos el valor por defecto como false
 
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -84,5 +86,13 @@ public class MovimientoInventarioProductoTerminado {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
+    }
+
+    public Boolean getEstadoEntrega() {
+        return estadoEntrega;
+    }
+
+    public void setEstadoEntrega(Boolean estadoEntrega) {
+        this.estadoEntrega = estadoEntrega;
     }
 }

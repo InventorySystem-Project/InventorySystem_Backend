@@ -11,8 +11,10 @@ public class MovimientoInventarioMateriaPrimaDTO {
     private String tipoMovimiento;
     private Integer cantidad;
     private String motivo;
+    private Boolean estadoRecepcion;  // Aquí añadimos el nuevo campo
 
     // Getters y Setters
+
     public Long getId() {
         return id;
     }
@@ -67,5 +69,13 @@ public class MovimientoInventarioMateriaPrimaDTO {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
+    }
+
+    public Boolean getEstadoRecepcion() {
+        return estadoRecepcion;
+    }
+
+    public void setEstadoRecepcion(Boolean estadoRecepcion) {
+        this.estadoRecepcion = estadoRecepcion;
     }
 }

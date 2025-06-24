@@ -1,12 +1,5 @@
 package com.inventorysystem_project.dtos;
 
-import com.inventorysystem_project.entities.Almacen;
-import com.inventorysystem_project.entities.ProductoTerminado;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-
 import java.util.Date;
 
 public class MovimientoInventarioProductoTerminadoDTO {
@@ -18,6 +11,9 @@ public class MovimientoInventarioProductoTerminadoDTO {
     private Date fechaMovimiento;
     private Integer cantidad;
     private String motivo;
+    private Boolean estadoEntrega;  // Aquí añadimos el nuevo campo
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -73,5 +69,13 @@ public class MovimientoInventarioProductoTerminadoDTO {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
+    }
+
+    public Boolean getEstadoEntrega() {
+        return estadoEntrega;
+    }
+
+    public void setEstadoEntrega(Boolean estadoEntrega) {
+        this.estadoEntrega = estadoEntrega;
     }
 }
