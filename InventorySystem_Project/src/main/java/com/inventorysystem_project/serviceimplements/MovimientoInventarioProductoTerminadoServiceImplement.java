@@ -6,6 +6,7 @@ import com.inventorysystem_project.serviceinterfaces.IMovimientoInventarioProduc
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,6 +17,7 @@ public class MovimientoInventarioProductoTerminadoServiceImplement implements IM
 
     @Override
     public void insert(MovimientoInventarioProductoTerminado movimientoInventarioProductoTerminado) {
+        movimientoInventarioProductoTerminado.setFechaMovimiento(new Date()); // <-- AÑADIR ESTA LÍNEA
         movimientoInventarioProductoTerminadoRepository.save(movimientoInventarioProductoTerminado);
     }
 

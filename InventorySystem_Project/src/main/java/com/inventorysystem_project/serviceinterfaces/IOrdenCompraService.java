@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface IOrdenCompraService {
 
-    void insert(OrdenCompra ordenCompra);
+    public OrdenCompra insert(OrdenCompra ordenCompra);
 
     List<OrdenCompra> list();
 
