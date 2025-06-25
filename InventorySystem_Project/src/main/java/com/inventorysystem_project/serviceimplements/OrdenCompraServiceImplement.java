@@ -15,10 +15,9 @@ public class OrdenCompraServiceImplement implements IOrdenCompraService {
     private OrdenCompraRepository ordenCompraRepository;
 
     @Override
-    public void insert(OrdenCompra ordenCompra) {
-        ordenCompraRepository.save(ordenCompra);
+    public OrdenCompra insert(OrdenCompra ordenCompra) {
+        return ordenCompraRepository.save(ordenCompra);
     }
-
     @Override
     public List<OrdenCompra> list() {
         return ordenCompraRepository.findAll();

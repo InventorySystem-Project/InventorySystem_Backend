@@ -20,7 +20,7 @@ public class MovimientoInventarioProductoTerminado {
 
     private String tipoMovimiento;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP) // <-- CAMBIAR DE DATE A TIMESTAMP
     private Date fechaMovimiento;
 
     private Integer cantidad;

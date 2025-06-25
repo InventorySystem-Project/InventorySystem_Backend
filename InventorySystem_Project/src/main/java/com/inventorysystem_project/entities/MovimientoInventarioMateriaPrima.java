@@ -21,6 +21,7 @@ public class MovimientoInventarioMateriaPrima implements Serializable {
     private MateriaPrima materiaPrima;
 
     @Column(name = "fecha_movimiento")
+    @Temporal(TemporalType.TIMESTAMP) // <-- AÑADIR ESTA LÍNEA
     private Date fechaMovimiento;
 
     @Column(name = "tipo_movimiento", length = 50)

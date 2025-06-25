@@ -6,6 +6,7 @@ import com.inventorysystem_project.serviceinterfaces.IMovimientoInventarioMateri
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -16,9 +17,9 @@ public class MovimientoInventarioMateriaPrimaServiceImplement implements IMovimi
 
     @Override
     public void insert(MovimientoInventarioMateriaPrima movimiento) {
+        movimiento.setFechaMovimiento(new Date()); // <-- AÑADIR ESTA LÍNEA
         movimientoRepository.save(movimiento);
     }
-
     @Override
     public List<MovimientoInventarioMateriaPrima> list() {
         return movimientoRepository.findAll();
