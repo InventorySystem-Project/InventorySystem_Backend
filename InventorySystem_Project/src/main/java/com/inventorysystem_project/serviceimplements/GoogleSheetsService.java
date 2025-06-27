@@ -27,7 +27,7 @@ public class GoogleSheetsService {
 
     // Inyecta la ruta del archivo desde las propiedades/variables de entorno.
     // Si no la encuentra, el valor será null gracias a ":#{null}".
-    @Value("${GOOGLE_CREDENTIALS_PATH:#{null}}")
+    @Value("${GOOGLE_CREDENTIALS_PATH}")
     private String credentialsPath;
 
     private Sheets sheetsService;
