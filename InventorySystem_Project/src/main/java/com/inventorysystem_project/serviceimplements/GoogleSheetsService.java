@@ -8,10 +8,11 @@ import com.google.api.services.sheets.v4.model.AppendValuesResponse;
 import com.google.api.services.sheets.v4.model.ValueRange;
 import com.google.auth.http.HttpCredentialsAdapter;
 import com.google.auth.oauth2.GoogleCredentials;
-import org.springframework.beans.factory.annotation.Value; // <-- Importante
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.io.FileInputStream; // <-- Importante
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.GeneralSecurityException;
@@ -25,28 +26,27 @@ public class GoogleSheetsService {
     private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
     private static final String SPREADSHEET_ID = "1esMo2ILu_xNgcvEm6G49QBd8PNhpj_3gHWg7ZtVP04Q";
 
-    // Inyecta la ruta del archivo desde las propiedades/variables de entorno.
-    // Si no la encuentra, el valor será null gracias a ":#{null}".
-    @Value("${GOOGLE_CREDENTIALS_PATH}")
-    private String credentialsPath;
+    private final Sheets sheetsService;
 
-    private Sheets sheetsService;
-
-    public GoogleSheetsService() throws IOException, GeneralSecurityException {
+    // --- INICIO DE LA CORRECCIÓN ---
+    // La inyección se hace en el constructor, no como un campo de la clase.
+    @Autowired
+    public GoogleSheetsService(@Value("${GOOGLE_CREDENTIALS_PATH:#{null}}") String credentialsPath) throws IOException, GeneralSecurityException {
         InputStream in;
 
-        // Si la variable de entorno está presente (en Render), la usa.
+        // La lógica usa el 'credentialsPath' que llega como parámetro del constructor.
         if (credentialsPath != null && !credentialsPath.isEmpty()) {
             System.out.println("Cargando credenciales desde la ruta externa: " + credentialsPath);
             in = new FileInputStream(credentialsPath);
         } else {
-            // Si no, la busca en la carpeta 'resources' (para que siga funcionando en local).
+            // Este bloque 'else' es tu respaldo para que funcione en local.
             System.out.println("Cargando credenciales desde la ruta interna de resources: /credentials.json");
             in = GoogleSheetsService.class.getResourceAsStream("/credentials.json");
         }
 
         if (in == null) {
-            throw new IOException("No se pudo encontrar el archivo de credenciales. Revisa la ruta.");
+            // Este error ahora es mucho más claro sobre la causa raíz.
+            throw new IOException("No se pudo encontrar el archivo de credenciales. Asegúrate de que la variable de entorno GOOGLE_CREDENTIALS_PATH esté bien configurada en Render o que credentials.json exista en resources para ejecución local.");
         }
 
         GoogleCredentials credentials = GoogleCredentials.fromStream(in)
@@ -59,6 +59,8 @@ public class GoogleSheetsService {
                 .setApplicationName(APPLICATION_NAME)
                 .build();
     }
+    // --- FIN DE LA CORRECCIÓN ---
+
 
     public void appendValues(String sheetName, List<List<Object>> values) throws IOException {
         String range = sheetName + "!A:M";
