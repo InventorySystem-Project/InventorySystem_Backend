@@ -197,7 +197,7 @@ public class OrdenCompraController {
             // --- INICIO DE LA MODIFICACIÓN ---
             // 1. Construir el mensaje de saludo personalizado
             String caption = String.format(
-                    "Hola, %s. Somos de Frederick Cueros EIRL y quisiéramos solicitar una cotización para la siguiente orden de compra. Gracias.",
+                    "Hola, %s. Somos de Frederick Cueros EIRL y quisiéramos solicitar una cotización para la siguiente orden de compra. Por favor, mandanos un mensaje a +51 912 921 025 para coordinar la cotizacion. Gracias. ",
                     requestDTO.getProviderName()
             );
 
