@@ -9,20 +9,25 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.HandlerExceptionResolver;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true) // Reemplaza a @EnableGlobalMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
 
     @Autowired
@@ -40,6 +45,7 @@ public class WebSecurityConfig {
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
+        // Mantenemos el factor de trabajo en 8 para un login más rápido
         return new BCryptPasswordEncoder(8);
     }
 
@@ -55,7 +61,9 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
+        // Se aplica la configuración de CORS directamente a la cadena de filtros de seguridad
+        http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // <-- CAMBIO: APLICAR CORS AQUÍ
                 .csrf(csrf -> csrf.disable())
                 .exceptionHandling(e -> e.authenticationEntryPoint(jwtAuthenticationEntryPoint))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -63,7 +71,27 @@ public class WebSecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/authenticate")).permitAll()
                         .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+
+    // <-- NUEVO BEAN: Define la configuración de CORS para toda la aplicación -->
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        // Orígenes permitidos (tu frontend en Netlify y el entorno local para desarrollo)
+        configuration.setAllowedOrigins(Arrays.asList("https://inventory-system-automation.netlify.app", "http://localhost:3000", "http://localhost:4200"));
+        // Métodos HTTP permitidos
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+        // Cabeceras permitidas
+        configuration.setAllowedHeaders(List.of("*"));
+        // Permitir credenciales (cookies, etc.)
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        // Aplicar esta configuración a todas las rutas de la API
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }
