@@ -45,7 +45,7 @@ public class Usuario {
 	@JoinColumn(name = "empresa_id", referencedColumnName = "id", nullable = true)  // Permite que la relación con 'empresa' sea nula
 	private Empresa empresa;
 
-	@ManyToOne(fetch = FetchType.EAGER)  // Elimina el cascade = CascadeType.ALL
+	@ManyToOne(fetch = FetchType.LAZY)  // Elimina el cascade = CascadeType.ALL
 	@JoinColumn(name = "rol_id", nullable = true)
 	private Rol rol;
 	// Getters and Setters
