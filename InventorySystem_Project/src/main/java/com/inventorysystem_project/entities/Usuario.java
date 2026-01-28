@@ -48,6 +48,13 @@ public class Usuario {
 	@ManyToOne(fetch = FetchType.LAZY)  // Elimina el cascade = CascadeType.ALL
 	@JoinColumn(name = "rol_id", nullable = true)
 	private Rol rol;
+
+	@Column(length = 20, nullable = true)
+	private String temaPreferido;
+
+	@Column(length = 10, nullable = true)
+	private String colorPrimario;
+
 	// Getters and Setters
 
 	public Long getId() {
@@ -152,5 +159,21 @@ public class Usuario {
 
 	public void setRol(Rol rol) {
 		this.rol = rol;
+	}
+
+	public String getTemaPreferido() {
+		return temaPreferido;
+	}
+
+	public void setTemaPreferido(String temaPreferido) {
+		this.temaPreferido = temaPreferido;
+	}
+
+	public String getColorPrimario() {
+		return colorPrimario;
+	}
+
+	public void setColorPrimario(String colorPrimario) {
+		this.colorPrimario = colorPrimario;
 	}
 }

@@ -1,4 +1,4 @@
-package com.inventorysystem_project.services;
+package com.inventorysystem_project.serviceimplements;
 
 import com.inventorysystem_project.entities.Usuario;
 import com.inventorysystem_project.repositories.UsuarioRepository;

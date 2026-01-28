@@ -21,6 +21,8 @@ public class UsuarioDTO {
     private Boolean enabled;
     private Long empresaId;  // Cambié a Empresa
     private Rol rol;  // Cambié a List<String> para manejar los nombres de los roles
+    private String temaPreferido;
+    private String colorPrimario;
 
     // Getters and Setters
 
@@ -127,5 +129,21 @@ public class UsuarioDTO {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public String getTemaPreferido() {
+        return temaPreferido;
+    }
+
+    public void setTemaPreferido(String temaPreferido) {
+        this.temaPreferido = temaPreferido;
+    }
+
+    public String getColorPrimario() {
+        return colorPrimario;
+    }
+
+    public void setColorPrimario(String colorPrimario) {
+        this.colorPrimario = colorPrimario;
     }
 }

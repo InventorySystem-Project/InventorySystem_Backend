@@ -5,11 +5,13 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "rol", uniqueConstraints = { @UniqueConstraint(columnNames = { "user_id", "rol" }) })
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Rol implements Serializable {
 
 	private static final long serialVersionUID = 1L;

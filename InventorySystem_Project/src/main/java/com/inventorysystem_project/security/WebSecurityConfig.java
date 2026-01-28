@@ -77,7 +77,7 @@ public class WebSecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Orígenes permitidos (tu frontend en Netlify y el entorno local para desarrollo)
-        configuration.setAllowedOrigins(Arrays.asList("https://inventory-system-automation.netlify.app", "http://localhost:3000", "http://localhost:4200"));
+        configuration.setAllowedOrigins(Arrays.asList("https://inventory-system-automation.netlify.app", "http://localhost:3000", "http://localhost:3001", "http://localhost:4200"));
         // Métodos HTTP permitidos
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         // Cabeceras permitidas
