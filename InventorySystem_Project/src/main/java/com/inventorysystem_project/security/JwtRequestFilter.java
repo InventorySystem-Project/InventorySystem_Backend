@@ -1,4 +1,5 @@
 package com.inventorysystem_project.security;
+
 import java.io.IOException;
 
 import jakarta.servlet.FilterChain;
@@ -17,7 +18,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import io.jsonwebtoken.ExpiredJwtException;
 import com.inventorysystem_project.serviceimplements.JwtUserDetailsService;
 
-
 //Clase 6
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -25,16 +25,23 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 	private JwtUserDetailsService jwtUserDetailsService;
 	@Autowired
 	private JwtTokenUtil jwtTokenUtil;
+
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
+		// Skip JWT check for OPTIONS requests
+		if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+			chain.doFilter(request, response);
+			return;
+		}
+
 		final String requestTokenHeader = request.getHeader("Authorization");
 		String username = null;
 		String jwtToken = null;
 		// JWT Token is in the form "Bearer token". Remove Bearer word and get
 		// only the Token
 		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-			//jwtToken = requestTokenHeader.substring(7);
+			// jwtToken = requestTokenHeader.substring(7);
 			jwtToken = requestTokenHeader.split(" ")[1].trim();
 
 			try {
