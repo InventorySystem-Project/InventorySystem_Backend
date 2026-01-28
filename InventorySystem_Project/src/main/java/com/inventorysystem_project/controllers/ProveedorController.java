@@ -18,6 +18,12 @@ public class ProveedorController {
     @Autowired
     private IProveedorService proveedorService;
 
+    @GetMapping("/paises")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
+    public List<ProveedorDTO> listarPaises() {
+        return List.of();
+    }
+
     @PostMapping("/registrar")
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER') or hasAuthority('GUEST')")
     public void registrar(@RequestBody ProveedorDTO dto) {
